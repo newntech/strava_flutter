@@ -34,7 +34,7 @@ abstract class Auth {
     prefs.setString('strava_accessToken', token);
     prefs.setInt('strava_expiresAt', expiresAt); // Stored in seconds
     prefs.setInt('strava_expiresIn',
-        expiresIn); // Value is valid at the time the token has been issued
+        expiresIn ?? 0); // Value is valid at the time the token has been issued
     prefs.setString('strava_scope', scope);
     prefs.setString('strava_refreshToken', refreshToken);
 
