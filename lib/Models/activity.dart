@@ -21,8 +21,8 @@ class DetailedActivity {
   int elapsedTime;
   double totalElevationGain;
   String type;
-  String startDate;
-  String startDateLocal;
+  DateTime startDate;
+  DateTime startDateLocal;
   String timezone;
   double utcOffset;
   List<double> startLatlng;
@@ -152,8 +152,11 @@ class DetailedActivity {
     elapsedTime = json['elapsed_time'];
     totalElevationGain = json['total_elevation_gain'].toDouble();
     type = json['type'];
-    startDate = json['start_date'];
-    startDateLocal = json['start_date_local'];
+    startDate =
+        json['start_date'] != null ? _parseDate(json['start_date']) : null;
+    startDateLocal = json['start_date_local'] != null
+        ? _parseDate(json['start_date_local'])
+        : null;
     timezone = json['timezone'];
     utcOffset = json['utc_offset'];
     // startLatlng = json['start_latlng'].cast<double>();
@@ -320,8 +323,6 @@ class DetailedActivity {
   }
 }
 
-
-
 class Carte {
   String id;
   String polyline;
@@ -346,7 +347,6 @@ class Carte {
     return data;
   }
 }
-
 
 /**** 
 class SegmentEfforts {
@@ -678,8 +678,9 @@ class Laps {
     activity = json['activity'] != null
         ? new Activity.fromJson(json['activity'])
         : null;
-    athlete =
-        json['athlete'] != null ? AthleteEffort.fromJson(json['athlete']) : null;
+    athlete = json['athlete'] != null
+        ? AthleteEffort.fromJson(json['athlete'])
+        : null;
     elapsedTime = json['elapsed_time'];
     movingTime = json['moving_time'];
     startDate = json['start_date'];
@@ -830,9 +831,8 @@ class HighlightedKudosers {
 
 class SummaryActivity {
   Fault fault;
-  int id;
   int resourceState;
-  AthleteEffort athlete;
+  Athlete athlete;
   String name;
   double distance;
   int movingTime;
@@ -840,11 +840,47 @@ class SummaryActivity {
   double totalElevationGain;
   String type;
   int workoutType;
+  int id;
+  String externalId;
+  double uploadId;
   DateTime startDate;
   DateTime startDateLocal;
+  String timezone;
+  double utcOffset;
+  List<double> startLatlng;
+  List<double> endLatlng;
+  String locationCity;
+  String locationState;
+  String locationCountry;
+  int achievementCount;
+  int kudosCount;
+  int commentCount;
+  int athleteCount;
+  int photoCount;
+  bool trainer;
+  bool commute;
+  bool manual;
+  bool private;
+  bool flagged;
+  String gearId;
+  bool fromAcceptedTag;
+  double averageSpeed;
+  double maxSpeed;
+  double averageCadence;
+  double averageWatts;
+  int weightedAverageWatts;
+  double kilojoules;
+  bool deviceWatts;
+  bool hasHeartrate;
+  double averageHeartrate;
+  double maxHeartrate;
+  int maxWatts;
+  int prCount;
+  int totalPhotoCount;
+  bool hasKudoed;
+  double sufferScore;
 
   SummaryActivity({
-    this.id,
     this.resourceState,
     this.athlete,
     this.name,
@@ -854,51 +890,161 @@ class SummaryActivity {
     this.totalElevationGain,
     this.type,
     this.workoutType,
-    // this.startDate,
-    // this.startDateLocal
+    this.id,
+    this.externalId,
+    this.uploadId,
+    this.startDate,
+    this.startDateLocal,
+    this.timezone,
+    this.utcOffset,
+    this.startLatlng,
+    this.endLatlng,
+    this.locationCity,
+    this.locationState,
+    this.locationCountry,
+    this.achievementCount,
+    this.kudosCount,
+    this.commentCount,
+    this.athleteCount,
+    this.photoCount,
+    this.trainer,
+    this.commute,
+    this.manual,
+    this.private,
+    this.flagged,
+    this.gearId,
+    this.fromAcceptedTag,
+    this.averageSpeed,
+    this.maxSpeed,
+    this.averageCadence,
+    this.averageWatts,
+    this.weightedAverageWatts,
+    this.kilojoules,
+    this.deviceWatts,
+    this.hasHeartrate,
+    this.averageHeartrate,
+    this.maxHeartrate,
+    this.maxWatts,
+    this.prCount,
+    this.totalPhotoCount,
+    this.hasKudoed,
+    this.sufferScore,
   });
 
-  SummaryActivity.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    resourceState = json['resource_state'];
-    athlete =
-        json['athlete'] != null ? AthleteEffort.fromJson(json['athlete']) : null;
-    name = json['name'];
-    distance = json['distance'];
-    movingTime = json['moving_time'];
-    elapsedTime = json['elapsed_time'];
-    var _elevationGain = json['total_elevation_gain'];
-    // To convert the dynamic var in double when it is an int
-    if ((_elevationGain % 1) == 0) {
-      _elevationGain = _elevationGain + 0.0;
-    }
-    // if (_elevationGain == 0) _elevationGain = 0.0;
-    totalElevationGain = _elevationGain;
-    type = json['type'];
-    workoutType = json['workout_type'];
-    startDate =
-        json['start_date'] != null ? _parseDate(json['start_date']) : null;
-    startDateLocal = json['start_date_local'] != null
-        ? _parseDate(json['start_date_local'])
-        : null;
-  }
+  factory SummaryActivity.fromJson(Map<String, dynamic> json) =>
+      SummaryActivity(
+          resourceState: json["resource_state"],
+          athlete: Athlete.fromJson(json["athlete"]),
+          name: json["name"],
+          distance: json["distance"].toDouble(),
+          movingTime: json["moving_time"],
+          elapsedTime: json["elapsed_time"],
+          totalElevationGain: json["total_elevation_gain"] != null
+              ? json["total_elevation_gain"].toDouble()
+              : null,
+          type: json["type"],
+          workoutType: json["workout_type"],
+          id: json["id"],
+          externalId: json["external_id"],
+          uploadId: json["upload_id"].toDouble(),
+          startDate: DateTime.parse(json["start_date"]),
+          startDateLocal: DateTime.parse(json["start_date_local"]),
+          timezone: json["timezone"],
+          utcOffset: json["utc_offset"].toDouble(),
+          //startLatlng: json["start_latlng"],
+          //endLatlng: json["end_latlng"],
+          locationCity: json["location_city"],
+          locationState: json["location_state"],
+          locationCountry: json["location_country"],
+          achievementCount: json["achievement_count"],
+          kudosCount: json["kudos_count"],
+          commentCount: json["comment_count"],
+          athleteCount: json["athlete_count"],
+          photoCount: json["photo_count"],
+          trainer: json["trainer"],
+          commute: json["commute"],
+          manual: json["manual"],
+          private: json["private"],
+          flagged: json["flagged"],
+          gearId: json["gear_id"],
+          fromAcceptedTag: json["from_accepted_tag"],
+          averageSpeed: json["average_speed"].toDouble(),
+          maxSpeed: json["max_speed"].toDouble(),
+          averageCadence: json["average_cadence"] != null
+              ? json["average_cadence"].toDouble()
+              : null,
+          averageWatts: json["average_watts"] != null
+              ? json["average_watts"].toDouble()
+              : null,
+          weightedAverageWatts: json["weighted_average_watts"],
+          kilojoules:
+              json["kilojoules"] != null ? json["kilojoules"].toDouble() : null,
+          deviceWatts: json["device_watts"],
+          hasHeartrate: json["has_heartrate"],
+          averageHeartrate: json["average_heartrate"] != null
+              ? json["average_heartrate"].toDouble()
+              : null,
+          maxHeartrate: json["max_heartrate"] != null
+              ? json["max_heartrate"].toDouble()
+              : null,
+          maxWatts: json["max_watts"],
+          prCount: json["pr_count"],
+          totalPhotoCount: json["total_photo_count"],
+          hasKudoed: json["has_kudoed"],
+          sufferScore: json["suffer_score"] != null
+              ? json["suffer_score"].toDouble()
+              : null);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['resource_state'] = this.resourceState;
-    if (this.athlete != null) {
-      data['athlete'] = this.athlete.toJson();
-    }
-    data['name'] = this.name;
-    data['distance'] = this.distance;
-    data['moving_time'] = this.movingTime;
-    data['elapsed_time'] = this.elapsedTime;
-    data['total_elevation_gain'] = this.totalElevationGain;
-    data['type'] = this.type;
-    data['workout_type'] = this.workoutType;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "resource_state": resourceState,
+        "athlete": athlete.toJson(),
+        "name": name,
+        "distance": distance,
+        "moving_time": movingTime,
+        "elapsed_time": elapsedTime,
+        "total_elevation_gain": totalElevationGain,
+        "type": type,
+        "workout_type": workoutType,
+        "id": id,
+        "external_id": externalId,
+        "upload_id": uploadId,
+        "start_date": startDate.toIso8601String(),
+        "start_date_local": startDateLocal.toIso8601String(),
+        "timezone": timezone,
+        "utc_offset": utcOffset,
+        "start_latlng": startLatlng,
+        "end_latlng": endLatlng,
+        "location_city": locationCity,
+        "location_state": locationState,
+        "location_country": locationCountry,
+        "achievement_count": achievementCount,
+        "kudos_count": kudosCount,
+        "comment_count": commentCount,
+        "athlete_count": athleteCount,
+        "photo_count": photoCount,
+        "trainer": trainer,
+        "commute": commute,
+        "manual": manual,
+        "private": private,
+        "flagged": flagged,
+        "gear_id": gearId,
+        "from_accepted_tag": fromAcceptedTag,
+        "average_speed": averageSpeed,
+        "max_speed": maxSpeed,
+        "average_cadence": averageCadence,
+        "average_watts": averageWatts,
+        "weighted_average_watts": weightedAverageWatts,
+        "kilojoules": kilojoules,
+        "device_watts": deviceWatts,
+        "has_heartrate": hasHeartrate,
+        "average_heartrate": averageHeartrate,
+        "max_heartrate": maxHeartrate,
+        "max_watts": maxWatts,
+        "pr_count": prCount,
+        "total_photo_count": totalPhotoCount,
+        "has_kudoed": hasKudoed,
+        "suffer_score": sufferScore,
+      };
 }
 
 DateTime _parseDate(String dateTimeToParse) {

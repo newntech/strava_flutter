@@ -7,12 +7,11 @@ import 'dart:convert';
 import 'package:strava_flutter/Models/fault.dart';
 
 class StreamSet {
-  Fault fault;
-
   ActivityStream distance;
   ActivityStream watts;
   ActivityStream time;
 
+  Fault fault;
   StreamSet({
     this.distance,
     this.watts,

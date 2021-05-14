@@ -31,12 +31,15 @@ abstract class Auth {
   Future<void> _saveToken(String token, int expiresAt, int expiresIn,
       String scope, String refreshToken) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('strava_accessToken', token);
-    prefs.setInt('strava_expiresAt', expiresAt); // Stored in seconds
-    prefs.setInt('strava_expiresIn',
-        expiresIn ?? 0); // Value is valid at the time the token has been issued
-    prefs.setString('strava_scope', scope);
-    prefs.setString('strava_refreshToken', refreshToken);
+
+    prefs.setString('strava_accessToken', token ?? null.toString());
+    prefs.setInt('strava_expiresAt', expiresAt ?? -1); // Stored in seconds
+    prefs.setInt(
+        'strava_expiresIn',
+        expiresIn ??
+            -1); // Value is valid at the time the token has been issued
+    prefs.setString('strava_scope', scope ?? null.toString());
+    prefs.setString('strava_refreshToken', refreshToken ?? null.toString());
 
     // Save also in globals to get direct access
     globals.token.accessToken = token;
@@ -46,6 +49,14 @@ abstract class Auth {
     globals.token.refreshToken = refreshToken;
 
     globals.displayInfo('token saved!!!');
+  }
+
+  getNullableString(String key, SharedPreferences instance) {
+    var result = instance.getString(key);
+    if (result == null.toString()) {
+      return null;
+    }
+    return result;
   }
 
   /// Get the stored token and expiry date
@@ -59,12 +70,12 @@ abstract class Auth {
     globals.displayInfo('Entering getStoredToken');
 
     try {
-      localToken.accessToken = prefs.getString('strava_accessToken').toString();
+      localToken.accessToken = getNullableString('strava_accessToken', prefs);
       // localToken.expiresAt = prefs.getInt('expire') * 1000; // To get in ms
       localToken.expiresAt = prefs.getInt('strava_expiresAt');
       localToken.expiresIn = prefs.getInt(('strava_expiresIn'));
-      localToken.scope = prefs.getString('strava_scope');
-      localToken.refreshToken = prefs.getString('strava_refreshToken');
+      localToken.scope = getNullableString('strava_scope', prefs);
+      localToken.refreshToken = getNullableString('strava_refreshToken', prefs);
 
       // load the data in globals
       globals.token.accessToken = localToken.accessToken;

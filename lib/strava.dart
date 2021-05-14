@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
+import 'API/streams.dart';
 import 'Models/fault.dart';
 import 'Models/gear.dart';
 
@@ -31,7 +32,8 @@ class Strava
         Segments,
         SegmentEfforts,
         Athletes,
-        Races {
+        Races,
+        Streams {
   String secret;
 
   /// Initialize the Strava class
