@@ -1,4 +1,4 @@
-
+// @dart = 2.9
 class Athlete {
   int id;
   int resourceState;
@@ -11,9 +11,9 @@ class Athlete {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['resource_state'] = this.resourceState;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['resource_state'] = resourceState;
     return data;
   }
 }

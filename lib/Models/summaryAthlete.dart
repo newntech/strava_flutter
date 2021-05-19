@@ -1,4 +1,5 @@
-// Summary Athlete
+// @dart = 2.9
+//// Summary Athlete
 
 import 'fault.dart';
 
@@ -33,14 +34,14 @@ class SummaryAthlete {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['resource_state'] = this.resourceState;
-    data['firstname'] = this.firstname;
-    data['lastname'] = this.lastname;
-    data['membership'] = this.membership;
-    data['admin'] = this.admin;
-    data['owner'] = this.owner;
-    data['id'] = this.id;
+    final data = <String, dynamic>{};
+    data['resource_state'] = resourceState;
+    data['firstname'] = firstname;
+    data['lastname'] = lastname;
+    data['membership'] = membership;
+    data['admin'] = admin;
+    data['owner'] = owner;
+    data['id'] = id;
     return data;
   }
 }

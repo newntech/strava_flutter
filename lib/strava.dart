@@ -34,7 +34,7 @@ class Strava
         Athletes,
         Races,
         Streams {
-  String secret;
+  late String secret;
 
   /// Initialize the Strava class
   /// Needed to call Strava API
@@ -50,7 +50,7 @@ class Strava
   /// Give answer only if id is related to logged athlete
   ///
   Future<Gear> getGearById(String id) async {
-    Gear returnGear = Gear();
+    var returnGear = Gear();
 
     globals.displayInfo('Entering getGearById');
 
@@ -65,7 +65,7 @@ class Strava
         globals.displayInfo(' ${rep.body}');
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
 
-        Gear _gear = Gear.fromJson(jsonResponse);
+        var _gear = Gear.fromJson(jsonResponse);
         _gear.fault = Fault(88, '');
         globals.displayInfo(_gear.description);
         _gear.fault.statusCode = error.statusOk;
@@ -73,7 +73,7 @@ class Strava
       } else {
         globals.displayInfo('Problem in getGearById');
       }
-      returnGear.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+      returnGear.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     }
 
     return returnGear;

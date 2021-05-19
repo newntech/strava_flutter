@@ -40,7 +40,7 @@ Map<String, String> createHeader() {
 /// Coming from http request
 ///
 Fault errorCheck(int statusCode, String reason) {
-  Fault returnFault = Fault(statusCode, reason);
+  var returnFault = Fault(statusCode, reason);
 
   return returnFault;
 }

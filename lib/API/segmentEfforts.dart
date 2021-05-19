@@ -8,7 +8,7 @@ import 'package:strava_flutter/errorCodes.dart' as error;
 
 abstract class SegmentEfforts {
   Future<DetailedSegmentEffort> getSegmentEffortById(int segId) async {
-    DetailedSegmentEffort _returnSeg = DetailedSegmentEffort();
+    var _returnSeg = DetailedSegmentEffort();
 
     var _header = globals.createHeader();
 
@@ -51,11 +51,11 @@ abstract class SegmentEfforts {
   ///
   Future<DetailedSegmentEffort> getEffortsbySegmentId(
       int segId, String startDateLocal, String endDateLocal) async {
-    DetailedSegmentEffort _returnSeg = DetailedSegmentEffort();
+    var _returnSeg = DetailedSegmentEffort();
 
     var _header = globals.createHeader();
-    bool isRetrieveDone = false;
-    int _perPage = 50; // Nombre of segments retrieved by request
+    var isRetrieveDone = false;
+    var _perPage = 50; // Nombre of segments retrieved by request
 
     globals.displayInfo('Entering getEffortsbySegmentId');
 
@@ -72,7 +72,7 @@ abstract class SegmentEfforts {
                 _perPage.toString();
 
         var rep = await http.get(Uri.parse(reqSeg), headers: _header);
-        int _nbSegments = 0;
+        var _nbSegments = 0;
 
         if (rep.statusCode == 200) {
           globals.displayInfo(rep.statusCode.toString());
@@ -98,7 +98,7 @@ abstract class SegmentEfforts {
 
               }
 
-              DetailedSegmentEffort _segEffort =
+              var _segEffort =
                   DetailedSegmentEffort.fromJson(jsonResponse[0]);
               globals.displayInfo(_segEffort.name);
 

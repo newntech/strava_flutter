@@ -1,3 +1,4 @@
+// @dart = 2.9
 // clubs.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -16,11 +17,11 @@ abstract class Clubs {
   /// id of the club
   /// No need to be member of the club
   Future<List<SummaryAthlete>> getClubMembersById(String id) async {
-    List<SummaryAthlete> returnListMembers = List<SummaryAthlete>();
-    int _pageNumber = 1;
-    int _perPage = 30; // Number of activities retrieved per http request
-    bool isRetrieveDone = false;
-    List<SummaryAthlete> _listSummary = List<SummaryAthlete>();
+    var returnListMembers = <SummaryAthlete>[];
+    var _pageNumber = 1;
+    var _perPage = 30; // Number of activities retrieved per http request
+    var isRetrieveDone = false;
+    var _listSummary = <SummaryAthlete>[];
 
     globals.displayInfo('Entering getClubMembersById');
 
@@ -28,12 +29,12 @@ abstract class Clubs {
 
     if (_header.containsKey('88') == false) {
       do {
-        String reqList = "https://www.strava.com/api/v3/clubs/" +
+        var reqList = 'https://www.strava.com/api/v3/clubs/' +
             id +
             '/members?page=$_pageNumber&per_page=$_perPage';
 
         var rep = await http.get(Uri.parse(reqList), headers: _header);
-        int _nbMembers = 0;
+        var _nbMembers = 0;
 
         if (rep.statusCode == 200) {
           globals.displayInfo(rep.statusCode.toString());
@@ -93,7 +94,7 @@ abstract class Clubs {
         globals.displayInfo('Club info ${rep.body}');
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
 
-        Club _club = Club.fromJson(jsonResponse);
+        var _club = Club.fromJson(jsonResponse);
         globals.displayInfo(_club.name);
 
         returnClub = _club;
@@ -114,21 +115,21 @@ abstract class Clubs {
   /// Need to be member of the club
   ///
   Future<List<SummaryActivity>> getClubActivitiesById(String id) async {
-    List<SummaryActivity> returnSummary = <SummaryActivity>[];
+    var returnSummary = <SummaryActivity>[];
 
     var _header = globals.createHeader();
-    int _pageNumber = 1;
-    int _perPage = 20; // Number of activities retrieved per http request
-    bool isRetrieveDone = false;
-    List<SummaryActivity> _listSummary = List<SummaryActivity>();
+    var _pageNumber = 1;
+    var _perPage = 20; // Number of activities retrieved per http request
+    var isRetrieveDone = false;
+    var _listSummary = <SummaryActivity>[];
 
     if (_header.containsKey('88') == false) {
       do {
-        String reqClub = 'https://www.strava.com/api/v3/clubs/' +
+        var reqClub = 'https://www.strava.com/api/v3/clubs/' +
             id +
             '/activities?page=$_pageNumber&per_page=$_perPage';
         var rep = await http.get(Uri.parse(reqClub), headers: _header);
-        int _nbActvity = 0;
+        var _nbActvity = 0;
 
         if (rep.statusCode == 200) {
           globals.displayInfo(rep.statusCode.toString());

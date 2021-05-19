@@ -1,3 +1,4 @@
+// @dart = 2.9
 import 'fault.dart';
 
 class Token {
@@ -18,7 +19,7 @@ class Token {
   String toString() => Token.toJsonMap(this).toString();
 
   static Map toJsonMap(Token model) {
-    Map ret = new Map();
+    var ret = {};
     ret['access_token'] = model.accessToken ?? 'Error';
     ret['token_type'] = model.tokenType ?? 'Error';
     ret['refresh_token'] = model.refreshToken ?? 'Error';
@@ -30,7 +31,7 @@ class Token {
 
   static Token fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    Token model = new Token();
+    var model = Token();
     model.accessToken = map['access_token'];
     model.refreshToken = map['refresh_token'];
     model.tokenType = map['token_type'];
@@ -54,7 +55,7 @@ class RefreshAnswer {
 
   static RefreshAnswer fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    RefreshAnswer model = RefreshAnswer();
+    var model = RefreshAnswer();
     model.accessToken = map['access_token'];
     model.refreshToken = map['refresh_token'];
     model.expiresAt = map['expires_at'];

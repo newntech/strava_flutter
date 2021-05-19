@@ -1,3 +1,4 @@
+// @dart = 2.9
 // oauth.dart
 
 import 'package:flutter/foundation.dart';
@@ -32,14 +33,14 @@ abstract class Auth {
       String scope, String refreshToken) async {
     final prefs = await SharedPreferences.getInstance();
 
-    prefs.setString('strava_accessToken', token ?? null.toString());
-    prefs.setInt('strava_expiresAt', expiresAt ?? -1); // Stored in seconds
-    prefs.setInt(
+    await prefs.setString('strava_accessToken', token ?? null.toString());
+    await prefs.setInt('strava_expiresAt', expiresAt ?? -1); // Stored in seconds
+    await prefs.setInt(
         'strava_expiresIn',
         expiresIn ??
             -1); // Value is valid at the time the token has been issued
-    prefs.setString('strava_scope', scope ?? null.toString());
-    prefs.setString('strava_refreshToken', refreshToken ?? null.toString());
+    await prefs.setString('strava_scope', scope ?? null.toString());
+    await prefs.setString('strava_refreshToken', refreshToken ?? null.toString());
 
     // Save also in globals to get direct access
     globals.token.accessToken = token;
@@ -109,7 +110,7 @@ abstract class Auth {
   Future<void> _getStravaCode(
       String clientID, String scope, String prompt) async {
     globals.displayInfo('Entering getStravaCode');
-    var code = "";
+    var code = '';
 
     String redirectUrl;
 
@@ -127,7 +128,7 @@ abstract class Auth {
     StreamSubscription _sub;
 
     // closeWebView();
-    launch(reqAuth,
+    await launch(reqAuth,
         forceWebView: false,
         // forceWebView: true,
         forceSafariVC: false,
@@ -156,8 +157,8 @@ abstract class Auth {
         if (uri.scheme.compareTo('stravaflutter_$clientID') != 0) {
           globals.displayInfo('This is not the good scheme ${uri.scheme}');
         }
-        code = uri.queryParameters["code"];
-        final error = uri.queryParameters["error"];
+        code = uri.queryParameters['code'];
+        final error = uri.queryParameters['error'];
 
         globals.displayInfo('code $code, error $error');
 
@@ -214,25 +215,25 @@ abstract class Auth {
   Future<bool> oauth(
       String clientID, String scope, String secret, String prompt) async {
     globals.displayInfo('Welcome to Oauth');
-    bool isAuthOk = false;
+    var isAuthOk = false;
     bool isExpired;
 
-    final Token tokenStored = await getStoredToken();
-    final String _token = tokenStored.accessToken;
+    final tokenStored = await getStoredToken();
+    final _token = tokenStored.accessToken;
 
     isExpired = _isTokenExpired(tokenStored);
     globals.displayInfo('is token expired? $isExpired');
 
     // Check if the token is not expired
     // if (_token != null) {
-    if (_token != null && _token != "null") {
+    if (_token != null && _token != 'null') {
       globals.displayInfo(
           'token has been stored before! ${tokenStored.accessToken}  exp. ${tokenStored.expiresAt}');
     }
 
     // Use the refresh token to get a new access token
-    if (isExpired && _token != null && _token != "null") {
-      RefreshAnswer _refreshAnswer =
+    if (isExpired && _token != null && _token != 'null') {
+      var _refreshAnswer =
           await _getNewAccessToken(clientID, secret, tokenStored.refreshToken);
       // Update with new values
       if (_refreshAnswer.fault.statusCode == 200) {
@@ -245,7 +246,7 @@ abstract class Auth {
     }
 
     // Check if the scope has changed
-    if (tokenStored.scope != scope || _token == "null" || _token == null) {
+    if (tokenStored.scope != scope || _token == 'null' || _token == null) {
       // Ask for a new authorization
       globals.displayInfo('Doing a new authorization');
       isAuthOk = await _newAuthorization(clientID, secret, scope, prompt);
@@ -258,7 +259,7 @@ abstract class Auth {
 
   Future<bool> _newAuthorization(
       String clientID, String secret, String scope, String prompt) async {
-    bool returnValue = false;
+    var returnValue = false;
 
     await _getStravaCode(clientID, scope, prompt);
 
@@ -288,7 +289,7 @@ abstract class Auth {
   ///   refreshToken (because Strava can change it when asking for new access token)
   Future<RefreshAnswer> _getNewAccessToken(
       String clientID, String secret, String refreshToken) async {
-    RefreshAnswer returnToken = RefreshAnswer();
+    var returnToken = RefreshAnswer();
 
     final urlRefresh =
         'https://www.strava.com/oauth/token?client_id=$clientID&client_secret=$secret&grant_type=refresh_token&refresh_token=$refreshToken';
@@ -313,7 +314,7 @@ abstract class Auth {
 
   Future<Token> _getStravaToken(
       String clientID, String secret, String code) async {
-    Token _answer = Token();
+    var _answer = Token();
 
     globals.displayInfo('Entering getStravaToken!!');
     // Put your own secret in secret.dart
@@ -332,7 +333,7 @@ abstract class Auth {
       // will return _answer null
     } else {
       final Map<String, dynamic> tokenBody = json.decode(value.body);
-      final Token _body = Token.fromJson(tokenBody);
+      final _body = Token.fromJson(tokenBody);
       var accessToken = _body.accessToken;
       var refreshToken = _body.refreshToken;
       // var expiresAt = _body.expiresAt * 1000; // To get the exp. date in ms
@@ -375,7 +376,7 @@ abstract class Auth {
   ///return codes:
   /// statusOK or statusNoAuthenticationYet
   Future<Fault> deAuthorize() async {
-    Fault fault = Fault(error.statusUnknownError, '');
+    var fault = Fault(error.statusUnknownError, '');
 
     if (globals.token.accessToken == null) {
       // Token has not been yet stored in memory
@@ -386,7 +387,7 @@ abstract class Auth {
 
     // If header is not "empty"
     if (_header.containsKey('88') == false) {
-      final reqDeAuthorize = "https://www.strava.com/oauth/deauthorize";
+      final reqDeAuthorize = 'https://www.strava.com/oauth/deauthorize';
       globals.displayInfo('request $reqDeAuthorize');
       final rep = await http.post(Uri.parse(reqDeAuthorize), headers: _header);
       if (rep.statusCode == 200) {

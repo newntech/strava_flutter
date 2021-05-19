@@ -17,7 +17,7 @@ abstract class Streams {
   /// scope needed: read_all
   ///
   Future<StreamSet> getActivityStreams(String id, List<String> keys) async {
-    StreamSet returnStream = StreamSet();
+    var returnStream = StreamSet();
 
     var _header = globals.createHeader();
 
@@ -32,7 +32,7 @@ abstract class Streams {
         globals.displayInfo('Stream info ${rep.body}');
 //        final Map<String, dynamic> jsonResponse = json.decode(rep.body);
 
-        StreamSet _stream = StreamSet.fromJson(rep.body);
+        var _stream = StreamSet.fromJson(rep.body);
         //globals.displayInfo(_stream);
 
         returnStream = _stream;

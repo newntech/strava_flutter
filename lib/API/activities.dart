@@ -1,3 +1,4 @@
+// @dart = 2.9
 // activities.dart
 import 'package:http/http.dart' as http;
 import 'package:strava_flutter/Models/fault.dart';
@@ -14,14 +15,14 @@ abstract class Activities {
   /// retrieve a detailed activity from its id
   ///
   Future<DetailedActivity> getActivityById(String id) async {
-    DetailedActivity returnActivity = DetailedActivity();
+    var returnActivity = DetailedActivity();
 
     var _header = globals.createHeader();
 
     globals.displayInfo('Entering getActivityById');
 
     if (_header.containsKey('88') == false) {
-      final String reqActivity = 'https://www.strava.com/api/v3/activities/' +
+      final reqActivity = 'https://www.strava.com/api/v3/activities/' +
           id +
           '?include_all_efforts=true';
       var rep = await http.get(Uri.parse(reqActivity), headers: _header);
@@ -30,7 +31,7 @@ abstract class Activities {
         globals.displayInfo(rep.statusCode.toString());
         globals.displayInfo('Activity info ${rep.body}');
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
-        final DetailedActivity _activity =
+        final _activity =
             DetailedActivity.fromJson(jsonResponse);
         globals.displayInfo(_activity.name);
 
@@ -63,7 +64,7 @@ abstract class Activities {
   Future<DetailedActivity> createActivity(
       String name, String type, String startDate, int elapsedTime,
       {String description, int distance, int isTrainer, int isCommute}) async {
-    DetailedActivity returnActivity = DetailedActivity();
+    var returnActivity = DetailedActivity();
 
     var _header = globals.createHeader();
 
@@ -90,7 +91,7 @@ abstract class Activities {
         globals.displayInfo('Activity info ${resp.body}');
         final Map<String, dynamic> jsonResponse = json.decode(resp.body);
 
-        final DetailedActivity _activity =
+        final _activity =
             DetailedActivity.fromJson(jsonResponse);
         globals.displayInfo(_activity.name);
 
@@ -125,7 +126,7 @@ abstract class Activities {
     globals.displayInfo('Entering getPhotosFromActivityById');
 
     if (_header.containsKey('88') == false) {
-      final String reqActivity =
+      final reqActivity =
           'https://www.strava.com/api/v3/activities/' + id + '/photos';
       var rep = await http.get(Uri.parse(reqActivity), headers: _header);
 
@@ -133,7 +134,7 @@ abstract class Activities {
         globals.displayInfo(rep.statusCode.toString());
         globals.displayInfo('Photos of activity${rep.body}');
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
-        final DetailedActivity _activity =
+        final _activity =
             DetailedActivity.fromJson(jsonResponse);
         globals.displayInfo(_activity.name);
 

@@ -1,3 +1,4 @@
+// @dart = 2.9
 // Summary Activity
 
 import 'fault.dart';
@@ -42,19 +43,19 @@ class SummaryActivity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['resource_state'] = this.resourceState;
-    if (this.athlete != null) {
-      data['athlete'] = this.athlete.toJson();
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['resource_state'] = resourceState;
+    if (athlete != null) {
+      data['athlete'] = athlete.toJson();
     }
-    data['name'] = this.name;
-    data['distance'] = this.distance;
-    data['moving_time'] = this.movingTime;
-    data['elapsed_time'] = this.elapsedTime;
-    data['total_elevation_gain'] = this.totalElevationGain;
-    data['type'] = this.type;
-    data['workout_type'] = this.workoutType;
+    data['name'] = name;
+    data['distance'] = distance;
+    data['moving_time'] = movingTime;
+    data['elapsed_time'] = elapsedTime;
+    data['total_elevation_gain'] = totalElevationGain;
+    data['type'] = type;
+    data['workout_type'] = workoutType;
     return data;
   }
 }
@@ -73,10 +74,10 @@ class Athlete {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['resource_state'] = this.resourceState;
-    data['firstname'] = this.firstname;
-    data['lastname'] = this.lastname;
+    final data = <String, dynamic>{};
+    data['resource_state'] = resourceState;
+    data['firstname'] = firstname;
+    data['lastname'] = lastname;
     return data;
   }
 }

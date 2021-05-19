@@ -1,3 +1,4 @@
+// @dart = 2.9
 import 'fault.dart';
 
 class SummarySegment {
@@ -92,50 +93,50 @@ class SummarySegment {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     totalElevationGain = json['total_elevation_gain'];
-    map = json['map'] != null ? new Carte.fromJson(json['map']) : null;
+    map = json['map'] != null ? Carte.fromJson(json['map']) : null;
     effortCount = json['effort_count'];
     athleteCount = json['athlete_count'];
     starCount = json['star_count'];
     athleteSegmentStats = json['athlete_segment_stats'] != null
-        ? new AthleteSegmentStats.fromJson(json['athlete_segment_stats'])
+        ? AthleteSegmentStats.fromJson(json['athlete_segment_stats'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['resource_state'] = this.resourceState;
-    data['name'] = this.name;
-    data['activity_type'] = this.activityType;
-    data['distance'] = this.distance;
-    data['average_grade'] = this.averageGrade;
-    data['maximum_grade'] = this.maximumGrade;
-    data['elevation_high'] = this.elevationHigh;
-    data['elevation_low'] = this.elevationLow;
-    data['start_latlng'] = this.startLatlng;
-    data['end_latlng'] = this.endLatlng;
-    data['start_latitude'] = this.startLatitude;
-    data['start_longitude'] = this.startLongitude;
-    data['end_latitude'] = this.endLatitude;
-    data['end_longitude'] = this.endLongitude;
-    data['climb_category'] = this.climbCategory;
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['country'] = this.country;
-    data['private'] = this.private;
-    data['hazardous'] = this.hazardous;
-    data['starred'] = this.starred;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['total_elevation_gain'] = this.totalElevationGain;
-    if (this.map != null) {
-      data['map'] = this.map.toJson();
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['resource_state'] = resourceState;
+    data['name'] = name;
+    data['activity_type'] = activityType;
+    data['distance'] = distance;
+    data['average_grade'] = averageGrade;
+    data['maximum_grade'] = maximumGrade;
+    data['elevation_high'] = elevationHigh;
+    data['elevation_low'] = elevationLow;
+    data['start_latlng'] = startLatlng;
+    data['end_latlng'] = endLatlng;
+    data['start_latitude'] = startLatitude;
+    data['start_longitude'] = startLongitude;
+    data['end_latitude'] = endLatitude;
+    data['end_longitude'] = endLongitude;
+    data['climb_category'] = climbCategory;
+    data['city'] = city;
+    data['state'] = state;
+    data['country'] = country;
+    data['private'] = private;
+    data['hazardous'] = hazardous;
+    data['starred'] = starred;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['total_elevation_gain'] = totalElevationGain;
+    if (map != null) {
+      data['map'] = map.toJson();
     }
-    data['effort_count'] = this.effortCount;
-    data['athlete_count'] = this.athleteCount;
-    data['star_count'] = this.starCount;
-    if (this.athleteSegmentStats != null) {
-      data['athlete_segment_stats'] = this.athleteSegmentStats.toJson();
+    data['effort_count'] = effortCount;
+    data['athlete_count'] = athleteCount;
+    data['star_count'] = starCount;
+    if (athleteSegmentStats != null) {
+      data['athlete_segment_stats'] = athleteSegmentStats.toJson();
     }
     return data;
   }
@@ -155,10 +156,10 @@ class Carte {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['polyline'] = this.polyline;
-    data['resource_state'] = this.resourceState;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['polyline'] = polyline;
+    data['resource_state'] = resourceState;
     return data;
   }
 }
@@ -177,10 +178,10 @@ class AthleteSegmentStats {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pr_elapsed_time'] = this.prElapsedTime;
-    data['pr_date'] = this.prDate;
-    data['effort_count'] = this.effortCount;
+    final data = <String, dynamic>{};
+    data['pr_elapsed_time'] = prElapsedTime;
+    data['pr_date'] = prDate;
+    data['effort_count'] = effortCount;
     return data;
   }
 }
@@ -277,50 +278,50 @@ class DetailedSegment {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     totalElevationGain = json['total_elevation_gain'];
-    map = json['map'] != null ? new Carte.fromJson(json['map']) : null;
+    map = json['map'] != null ? Carte.fromJson(json['map']) : null;
     effortCount = json['effort_count'];
     athleteCount = json['athlete_count'];
     starCount = json['star_count'];
     athleteSegmentStats = json['athlete_segment_stats'] != null
-        ? new AthleteSegmentStats.fromJson(json['athlete_segment_stats'])
+        ? AthleteSegmentStats.fromJson(json['athlete_segment_stats'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['resource_state'] = this.resourceState;
-    data['name'] = this.name;
-    data['activity_type'] = this.activityType;
-    data['distance'] = this.distance;
-    data['average_grade'] = this.averageGrade;
-    data['maximum_grade'] = this.maximumGrade;
-    data['elevation_high'] = this.elevationHigh;
-    data['elevation_low'] = this.elevationLow;
-    data['start_latlng'] = this.startLatlng;
-    data['end_latlng'] = this.endLatlng;
-    data['start_latitude'] = this.startLatitude;
-    data['start_longitude'] = this.startLongitude;
-    data['end_latitude'] = this.endLatitude;
-    data['end_longitude'] = this.endLongitude;
-    data['climb_category'] = this.climbCategory;
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['country'] = this.country;
-    data['private'] = this.private;
-    data['hazardous'] = this.hazardous;
-    data['starred'] = this.starred;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['total_elevation_gain'] = this.totalElevationGain;
-    if (this.map != null) {
-      data['map'] = this.map.toJson();
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['resource_state'] = resourceState;
+    data['name'] = name;
+    data['activity_type'] = activityType;
+    data['distance'] = distance;
+    data['average_grade'] = averageGrade;
+    data['maximum_grade'] = maximumGrade;
+    data['elevation_high'] = elevationHigh;
+    data['elevation_low'] = elevationLow;
+    data['start_latlng'] = startLatlng;
+    data['end_latlng'] = endLatlng;
+    data['start_latitude'] = startLatitude;
+    data['start_longitude'] = startLongitude;
+    data['end_latitude'] = endLatitude;
+    data['end_longitude'] = endLongitude;
+    data['climb_category'] = climbCategory;
+    data['city'] = city;
+    data['state'] = state;
+    data['country'] = country;
+    data['private'] = private;
+    data['hazardous'] = hazardous;
+    data['starred'] = starred;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['total_elevation_gain'] = totalElevationGain;
+    if (map != null) {
+      data['map'] = map.toJson();
     }
-    data['effort_count'] = this.effortCount;
-    data['athlete_count'] = this.athleteCount;
-    data['star_count'] = this.starCount;
-    if (this.athleteSegmentStats != null) {
-      data['athlete_segment_stats'] = this.athleteSegmentStats.toJson();
+    data['effort_count'] = effortCount;
+    data['athlete_count'] = athleteCount;
+    data['star_count'] = starCount;
+    if (athleteSegmentStats != null) {
+      data['athlete_segment_stats'] = athleteSegmentStats.toJson();
     }
     return data;
   }
@@ -333,7 +334,7 @@ class SegmentsList {
   SegmentsList({this.segments});
 
   factory SegmentsList.fromJson(List<dynamic> parsedJson) {
-    List<SummarySegment> segments = List<SummarySegment>();
+    var segments = <SummarySegment>[];
     segments = parsedJson.map((i) => SummarySegment.fromJson(i)).toList();
 
     return SegmentsList(segments: segments);
@@ -359,20 +360,20 @@ class SegmentLeaderboard {
     entryCount = json['entry_count'];
     komType = json['kom_type'];
     if (json['entries'] != null) {
-      entries = new List<Entries>();
+      entries = <Entries>[];
       json['entries'].forEach((v) {
-        entries.add(new Entries.fromJson(v));
+        entries.add(Entries.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['effort_count'] = this.effortCount;
-    data['entry_count'] = this.entryCount;
-    data['kom_type'] = this.komType;
-    if (this.entries != null) {
-      data['entries'] = this.entries.map((v) => v.toJson()).toList();
+    final data = Map<String, dynamic>();
+    data['effort_count'] = effortCount;
+    data['entry_count'] = entryCount;
+    data['kom_type'] = komType;
+    if (entries != null) {
+      data['entries'] = entries.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -404,13 +405,13 @@ class Entries {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['athlete_name'] = this.athleteName;
-    data['elapsed_time'] = this.elapsedTime;
-    data['moving_time'] = this.movingTime;
-    data['start_date'] = this.startDate;
-    data['start_date_local'] = this.startDateLocal;
-    data['rank'] = this.rank;
+    final data = Map<String, dynamic>();
+    data['athlete_name'] = athleteName;
+    data['elapsed_time'] = elapsedTime;
+    data['moving_time'] = movingTime;
+    data['start_date'] = startDate;
+    data['start_date_local'] = startDateLocal;
+    data['rank'] = rank;
     return data;
   }
 }

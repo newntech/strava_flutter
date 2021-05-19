@@ -1,3 +1,4 @@
+// @dart = 2.9
 // zones
 import 'fault.dart';
 
@@ -14,7 +15,7 @@ class Zone {
       var _infoZones = InfoZones();
       var list = parsedJson['zones'] as List;
       var fault = Fault(99, '');
-      List<DistributionBucket> _distributionBucket =
+      var _distributionBucket =
           list.map((i) => DistributionBucket.fromJson(i)).toList();
       _infoZones.customZones = _customZones;
       _infoZones.zones = _distributionBucket;
@@ -24,7 +25,7 @@ class Zone {
         infoZones: _infoZones,
       );
     } else {
-      Fault _fault = Fault(99, '');
+      var _fault = Fault(99, '');
       return Zone(fault: _fault, infoZones: null);
     }
   }
@@ -47,9 +48,9 @@ class DistributionBucket {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['max'] = this.max;
-    data['min'] = this.min;
+    final data = <String, dynamic>{};
+    data['max'] = max;
+    data['min'] = min;
     return data;
   }
 }
