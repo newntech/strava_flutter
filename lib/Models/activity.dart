@@ -947,7 +947,7 @@ class SummaryActivity {
           workoutType: json['workout_type'],
           id: json['id'],
           externalId: json['external_id'],
-          uploadId: json['upload_id'].toDouble(),
+          uploadId: json['upload_id']?.toDouble(),
           startDate: DateTime.parse(json['start_date']),
           startDateLocal: DateTime.parse(json['start_date_local']),
           timezone: json['timezone'],
