@@ -11,20 +11,22 @@ class StreamSet {
   ActivityStream distance;
   ActivityStream watts;
   ActivityStream time;
+  ActivityStream heartRate;
 
   Fault fault;
-  StreamSet({
-    this.distance,
-    this.watts,
-    this.time,
-  });
+  StreamSet({this.distance, this.watts, this.time, this.heartRate});
 
   factory StreamSet.fromJson(String str) => StreamSet.fromMap(json.decode(str));
 
   factory StreamSet.fromMap(Map<String, dynamic> json) => StreamSet(
         distance: ActivityStream.fromMap(json['distance']),
-        watts: ActivityStream.fromMap(json['watts']),
+        watts: json['watts'] != null
+            ? ActivityStream.fromMap(json['watts'])
+            : ActivityStream(),
         time: ActivityStream.fromMap(json['time']),
+        heartRate: json['heartrate'] != null
+            ? ActivityStream.fromMap(json['heartrate'])
+            : ActivityStream(),
       );
 }
 
