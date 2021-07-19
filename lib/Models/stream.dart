@@ -52,7 +52,8 @@ class ActivityStream {
   String toJson() => json.encode(toMap());
 
   factory ActivityStream.fromMap(Map<String, dynamic> json) => ActivityStream(
-        data: List<double>.from(json['data'].map((x) => x.toDouble())),
+        data: List<double>.from(
+            json['data'].map((x) => x != null ? x.toDouble() : 0.0)),
         seriesType: json['series_type'],
         originalSize: json['original_size'],
         resolution: json['resolution'],
