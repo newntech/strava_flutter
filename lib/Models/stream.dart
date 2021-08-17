@@ -8,13 +8,15 @@ import 'dart:convert';
 import 'package:strava_flutter/Models/fault.dart';
 
 class StreamSet {
+  ActivityStream altitude;
   ActivityStream distance;
   ActivityStream watts;
   ActivityStream time;
   ActivityStream heartRate;
 
   Fault fault;
-  StreamSet({this.distance, this.watts, this.time, this.heartRate});
+  StreamSet(
+      {this.distance, this.watts, this.time, this.heartRate, this.altitude});
 
   factory StreamSet.fromJson(String str) => StreamSet.fromMap(json.decode(str));
 
@@ -26,6 +28,9 @@ class StreamSet {
         time: ActivityStream.fromMap(json['time']),
         heartRate: json['heartrate'] != null
             ? ActivityStream.fromMap(json['heartrate'])
+            : ActivityStream(),
+        altitude: json['altitude'] != null
+            ? ActivityStream.fromMap(json['altitude'])
             : ActivityStream(),
       );
 }
