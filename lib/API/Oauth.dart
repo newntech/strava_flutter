@@ -34,13 +34,15 @@ abstract class Auth {
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('strava_accessToken', token ?? null.toString());
-    await prefs.setInt('strava_expiresAt', expiresAt ?? -1); // Stored in seconds
+    await prefs.setInt(
+        'strava_expiresAt', expiresAt ?? -1); // Stored in seconds
     await prefs.setInt(
         'strava_expiresIn',
         expiresIn ??
             -1); // Value is valid at the time the token has been issued
     await prefs.setString('strava_scope', scope ?? null.toString());
-    await prefs.setString('strava_refreshToken', refreshToken ?? null.toString());
+    await prefs.setString(
+        'strava_refreshToken', refreshToken ?? null.toString());
 
     // Save also in globals to get direct access
     globals.token.accessToken = token;
@@ -213,7 +215,8 @@ abstract class Auth {
   /// Do/show the Strava login if the scope has been changed since last storage of the token
   /// return true if no problem in authentication has been found
   Future<bool> oauth(
-      String clientID, String scope, String secret, String prompt) async {
+      String clientID, String scope, String secret, String prompt,
+      {bool reAuthAllowed = false}) async {
     globals.displayInfo('Welcome to Oauth');
     var isAuthOk = false;
     bool isExpired;
@@ -247,9 +250,14 @@ abstract class Auth {
 
     // Check if the scope has changed
     if (tokenStored.scope != scope || _token == 'null' || _token == null) {
-      // Ask for a new authorization
-      globals.displayInfo('Doing a new authorization');
-      isAuthOk = await _newAuthorization(clientID, secret, scope, prompt);
+      if (reAuthAllowed == true) {
+        // Ask for a new authorization
+        globals.displayInfo('Doing a new authorization');
+        isAuthOk = await _newAuthorization(clientID, secret, scope, prompt);
+      } else {
+        globals.displayInfo('New authorization required but not permitted.');
+        return false;
+      }
     } else {
       isAuthOk = true;
     }
