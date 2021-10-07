@@ -20,11 +20,11 @@ class Token {
 
   static Map toJsonMap(Token model) {
     var ret = {};
-    ret['access_token'] = model.accessToken ?? 'Error';
-    ret['token_type'] = model.tokenType ?? 'Error';
-    ret['refresh_token'] = model.refreshToken ?? 'Error';
-    ret['expires_at'] = model.expiresAt ?? 'Error';
-    ret['expires_in'] = model.expiresIn ?? 'Error';
+    ret['access_token'] = model.accessToken;
+    ret['token_type'] = model.tokenType;
+    ret['refresh_token'] = model.refreshToken;
+    ret['expires_at'] = model.expiresAt;
+    ret['expires_in'] = model.expiresIn;
 
     return ret;
   }

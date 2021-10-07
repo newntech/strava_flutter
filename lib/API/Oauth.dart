@@ -265,6 +265,28 @@ abstract class Auth {
     return isAuthOk;
   }
 
+  Future<String> getAuthCode(
+      String clientID, String scope, String secret, String prompt) async {
+    await _getStravaCode(clientID, scope, prompt);
+
+    final stravaCode = await onCodeReceived.stream.first;
+    if (stravaCode != null) {
+      final answer = await _getStravaToken(clientID, secret, stravaCode);
+
+      globals.displayInfo('answer ${answer.expiresAt}, ${answer.accessToken}');
+
+      // Save the token information
+      if (answer.accessToken != null && answer.expiresAt != null) {
+        await _saveToken(answer.accessToken, answer.expiresAt, answer.expiresIn,
+            scope, answer.refreshToken);
+      }
+
+      return jsonEncode(answer.toMap());
+    } else {
+      globals.displayInfo('code is still null');
+    }
+  }
+
   Future<bool> _newAuthorization(
       String clientID, String secret, String scope, String prompt) async {
     var returnValue = false;
