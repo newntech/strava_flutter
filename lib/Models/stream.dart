@@ -1,4 +1,4 @@
-// @dart = 2.9
+
 // To parse this JSON data, do
 //
 //     final activityStream = activityStreamFromMap(jsonString);
@@ -8,13 +8,13 @@ import 'dart:convert';
 import 'package:strava_flutter/Models/fault.dart';
 
 class StreamSet {
-  ActivityStream altitude;
-  ActivityStream distance;
-  ActivityStream watts;
-  ActivityStream time;
-  ActivityStream heartRate;
+  ActivityStream? altitude;
+  ActivityStream? distance;
+  ActivityStream? watts;
+  ActivityStream? time;
+  ActivityStream? heartRate;
 
-  Fault fault;
+  Fault? fault;
   StreamSet(
       {this.distance, this.watts, this.time, this.heartRate, this.altitude});
 
@@ -36,7 +36,7 @@ class StreamSet {
 }
 
 class ActivityStream {
-  Fault fault;
+  Fault? fault;
 
   ActivityStream({
     this.data,
@@ -45,11 +45,11 @@ class ActivityStream {
     this.resolution,
   });
 
-  String type;
-  List<double> data;
-  String seriesType;
-  int originalSize;
-  String resolution;
+  String? type;
+  List<double>? data;
+  String? seriesType;
+  int? originalSize;
+  String? resolution;
 
   factory ActivityStream.fromJson(String str) =>
       ActivityStream.fromMap(json.decode(str));
@@ -66,7 +66,7 @@ class ActivityStream {
 
   Map<String, dynamic> toMap() => {
         'type': type,
-        'data': List<dynamic>.from(data.map((x) => x)),
+        'data': List<dynamic>.from(data!.map((x) => x)),
         'series_type': seriesType,
         'original_size': originalSize,
         'resolution': resolution,

@@ -1,4 +1,3 @@
-// @dart = 2.9
 /// segments.dart
 ///
 ///
@@ -34,7 +33,7 @@ abstract class Segments {
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
 
         DetailedSegment _seg = DetailedSegment.fromJson(jsonResponse);
-        globals.displayInfo(_seg.name);
+        globals.displayInfo(_seg.name!);
 
         returnSeg = _seg;
       } else {
@@ -57,14 +56,14 @@ abstract class Segments {
   ///
   /// Limited for the moment to the first 50 starred segments
   ///
-  Future<SegmentsList> getLoggedInAthleteStarredSegments() async {
-    SegmentsList returnList;
+  Future<SegmentsList?> getLoggedInAthleteStarredSegments() async {
+    SegmentsList? returnList;
 
     returnList = SegmentsList();
     var _header = globals.createHeader();
 
     globals.displayInfo('Entering getLoggedInAthleteStarredSegments');
-    print('_header: ${_header[0]}');
+    print('_header: ${_header[0 as String]}');
 
     if (_header.containsKey('88') == false) {
       final reqSeg =
@@ -110,13 +109,13 @@ abstract class Segments {
   /// Not clear what is the purpose of context entries
   ///
   Future<SegmentLeaderboard> getLeaderboardBySegmentId(int id,
-      {int nbMaxEntries,
-      String gender,
-      String ageGroup,
-      String weightclass,
-      bool following,
-      int clubId,
-      String dateRange}) async {
+      {int? nbMaxEntries,
+      String? gender,
+      String? ageGroup,
+      String? weightclass,
+      bool? following,
+      int? clubId,
+      String? dateRange}) async {
     SegmentLeaderboard returnLeaderboard;
 
     returnLeaderboard = SegmentLeaderboard();
@@ -125,7 +124,7 @@ abstract class Segments {
     int _perPage = 50; // Number of activities retrieved per http request
     bool isRetrieveDone = false;
     int _nbEntries = 0;
-    List<Entries> _listEntries = List<Entries>();
+    List<Entries> _listEntries = <Entries>[];
 
     globals.displayInfo('Entering getLeaderboardBySegmentId');
 
@@ -163,14 +162,14 @@ abstract class Segments {
           globals.displayInfo(rep.statusCode.toString());
           globals.displayInfo('Leaderboard info ${rep.body}');
 
-          final Map<String, dynamic> jsonResponse = json.decode(rep.body);
+          final Map<String, dynamic>? jsonResponse = json.decode(rep.body);
           if (jsonResponse != null) {
             returnLeaderboard =
                 SegmentLeaderboard.fromJson(json.decode(rep.body));
 
             // Add entries to the list
-            returnLeaderboard.entries.forEach((ent) {
-              if (_nbEntries < nbMaxEntries) {
+            returnLeaderboard.entries!.forEach((ent) {
+              if (_nbEntries < nbMaxEntries!) {
                 _listEntries.add(ent);
                 _nbEntries++;
               }
@@ -178,7 +177,7 @@ abstract class Segments {
 
             globals.displayInfo('Entries ${_listEntries.length}');
 
-            if ((_listEntries.length >= returnLeaderboard.entryCount) ||
+            if ((_listEntries.length >= returnLeaderboard.entryCount!) ||
                 (_listEntries.length >= nbMaxEntries)) {
               globals.displayInfo(
                   '----> End of leaderboard   ${returnLeaderboard.entryCount}');
@@ -192,7 +191,7 @@ abstract class Segments {
           }
 
           returnLeaderboard.fault =
-              globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+              globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
         }
       } while (!isRetrieveDone);
     } else {
@@ -237,7 +236,7 @@ abstract class Segments {
         globals.displayInfo('Problem in starSegment request');
       }
       returnSegment.fault =
-          globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+          globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
       returnSegment.fault =

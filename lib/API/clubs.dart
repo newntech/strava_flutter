@@ -1,4 +1,4 @@
-// @dart = 2.9
+
 // clubs.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -67,7 +67,7 @@ abstract class Clubs {
         }
 
         returnListMembers[0].fault =
-            globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+            globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
       } while (!isRetrieveDone);
     } else {
       globals.displayInfo('Token not yet known');
@@ -80,8 +80,8 @@ abstract class Clubs {
 
   /// scope
   ///
-  Future<Club> getClubById(String id) async {
-    Club returnClub;
+  Future<Club?> getClubById(String id) async {
+    Club? returnClub;
 
     var _header = globals.createHeader();
 
@@ -95,17 +95,17 @@ abstract class Clubs {
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
 
         var _club = Club.fromJson(jsonResponse);
-        globals.displayInfo(_club.name);
+        globals.displayInfo(_club.name!);
 
         returnClub = _club;
       } else {
         globals.displayInfo('problem in getClubById request');
         // Todo add an error code
       }
-      returnClub.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+      returnClub!.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
-      returnClub.fault =
+      returnClub!.fault =
           Fault(error.statusTokenNotKnownYet, 'Token not yet known');
     }
 
@@ -161,11 +161,11 @@ abstract class Clubs {
           globals.displayInfo('problem in getClubActivitiesById request');
           globals.displayInfo('answer ${rep.body}');
           returnSummary[0].fault =
-              globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+              globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
         }
 
         returnSummary[0].fault =
-            globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+            globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
       } while (!isRetrieveDone);
     } else {
       globals.displayInfo('Token not yet known');

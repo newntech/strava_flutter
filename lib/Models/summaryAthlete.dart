@@ -1,17 +1,17 @@
-// @dart = 2.9
+
 //// Summary Athlete
 
 import 'fault.dart';
 
 class SummaryAthlete {
-  Fault fault;
-  int resourceState;
-  String firstname;
-  String lastname;
-  String membership;
-  bool admin;
-  bool owner;
-  int id;
+  Fault? fault;
+  int? resourceState;
+  String? firstname;
+  String? lastname;
+  String? membership;
+  bool? admin;
+  bool? owner;
+  int? id;
 
   SummaryAthlete(
       {this.fault,

@@ -1,4 +1,4 @@
-// @dart = 2.9
+
 // Detailed athlete
 import 'fault.dart';
 
@@ -6,38 +6,38 @@ import 'fault.dart';
 // import 'club.dart';
 
 class DetailedAthlete {
-  Fault fault;
-  int id;
-  String username;
-  int resourceState;
-  String firstname;
-  String lastname;
-  String city;
-  String state;
-  String country;
-  String sex;
-  bool premium;
-  String createdAt;
-  String updatedAt;
-  int badgeTypeId;
-  String profileMedium;
-  String profile;
-  String friend;
-  String follower;
-  int followerCount;
-  int friendCount;
-  int mutualFriendCount;
-  int athleteType;
-  String datePreference;
-  String measurementPreference;
+  Fault? fault;
+  int? id;
+  String? username;
+  int? resourceState;
+  String? firstname;
+  String? lastname;
+  String? city;
+  String? state;
+  String? country;
+  String? sex;
+  bool? premium;
+  String? createdAt;
+  String? updatedAt;
+  int? badgeTypeId;
+  String? profileMedium;
+  String? profile;
+  String? friend;
+  String? follower;
+  int? followerCount;
+  int? friendCount;
+  int? mutualFriendCount;
+  int? athleteType;
+  String? datePreference;
+  String? measurementPreference;
   // List<Null> clubs;
-  int ftp;
-  double weight;
-  List<Bikes> bikes;
-  List<Shoes> shoes;
+  int? ftp;
+  double? weight;
+  List<Bikes>? bikes;
+  List<Shoes>? shoes;
 
   DetailedAthlete(
-      {Fault fault,
+      {Fault? fault,
       this.id,
       this.username,
       this.resourceState,
@@ -105,13 +105,13 @@ class DetailedAthlete {
     if (json['bikes'] != null) {
       bikes = <Bikes>[];
       json['bikes'].forEach((v) {
-        bikes.add(Bikes.fromJson(v));
+        bikes!.add(Bikes.fromJson(v));
       });
     }
     if (json['shoes'] != null) {
       shoes = <Shoes>[];
       json['shoes'].forEach((v) {
-        shoes.add(Shoes.fromJson(v));
+        shoes!.add(Shoes.fromJson(v));
       });
     }
   }
@@ -149,21 +149,21 @@ class DetailedAthlete {
     data['ftp'] = ftp;
     data['weight'] = weight;
     if (bikes != null) {
-      data['bikes'] = bikes.map((v) => v.toJson()).toList();
+      data['bikes'] = bikes!.map((v) => v.toJson()).toList();
     }
     if (shoes != null) {
-      data['shoes'] = shoes.map((v) => v.toJson()).toList();
+      data['shoes'] = shoes!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Bikes {
-  String id;
-  bool primary;
-  String name;
-  int resourceState;
-  double distance;
+  String? id;
+  bool? primary;
+  String? name;
+  int? resourceState;
+  double? distance;
 
   Bikes({this.id, this.primary, this.name, this.resourceState, this.distance});
 
@@ -187,11 +187,11 @@ class Bikes {
 }
 
 class Shoes {
-  String id;
-  bool primary;
-  String name;
-  int resourceState;
-  double distance;
+  String? id;
+  bool? primary;
+  String? name;
+  int? resourceState;
+  double? distance;
 
   Shoes({this.id, this.primary, this.name, this.resourceState, this.distance});
 

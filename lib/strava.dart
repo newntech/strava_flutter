@@ -68,7 +68,7 @@ class Strava
         var _gear = Gear.fromJson(jsonResponse);
         _gear.fault = Fault(88, '');
         globals.displayInfo(_gear.description);
-        _gear.fault.statusCode = error.statusOk;
+        _gear.fault!.statusCode = error.statusOk;
         returnGear = _gear;
       } else {
         globals.displayInfo('Problem in getGearById');

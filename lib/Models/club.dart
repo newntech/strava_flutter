@@ -1,37 +1,37 @@
-// @dart = 2.9
+
 //// Club
 
 import 'fault.dart';
 
 class Club {
-  Fault fault;
-  int id;
-  int resourceState;
-  String name;
-  String profileMedium;
-  String profile;
-  String coverPhoto;
-  String coverPhotoSmall;
-  String sportType;
-  String city;
-  String state;
-  String country;
-  bool private;
-  int memberCount;
-  bool featured;
-  bool verified;
-  String url;
-  String membership;
-  bool admin;
-  bool owner;
-  String description;
-  String clubType;
-  int postCount;
-  int ownerId;
-  int followingCount;
+  Fault? fault;
+  int? id;
+  int? resourceState;
+  String? name;
+  String? profileMedium;
+  String? profile;
+  String? coverPhoto;
+  String? coverPhotoSmall;
+  String? sportType;
+  String? city;
+  String? state;
+  String? country;
+  bool? private;
+  int? memberCount;
+  bool? featured;
+  bool? verified;
+  String? url;
+  String? membership;
+  bool? admin;
+  bool? owner;
+  String? description;
+  String? clubType;
+  int? postCount;
+  int? ownerId;
+  int? followingCount;
 
   Club(
-      {Fault fault,
+      {Fault? fault,
       this.id,
       this.resourceState,
       this.name,

@@ -1,4 +1,3 @@
-// @dart = 2.9
 // Activity
 
 import 'gear.dart';
@@ -10,72 +9,72 @@ import 'package:strava_flutter/Models/athlete.dart';
 import 'package:intl/intl.dart';
 
 class DetailedActivity {
-  Fault fault;
-  int id;
-  int resourceState;
-  String externalId;
-  int uploadId;
-  Athlete athlete;
-  String name;
-  double distance;
-  int movingTime;
-  int elapsedTime;
-  double totalElevationGain;
-  String type;
-  DateTime startDate;
-  DateTime startDateLocal;
-  String timezone;
-  double utcOffset;
-  List<double> startLatlng;
-  List<double> endLatlng;
-  double startLatitude;
-  double startLongitude;
-  int achievementCount;
-  int kudosCount;
-  int commentCount;
-  int athleteCount;
-  int photoCount;
-  Carte map;
-  bool trainer;
-  bool commute;
-  bool manual;
-  bool private;
-  bool flagged;
-  String gearId;
-  bool fromAcceptedTag;
-  double averageSpeed;
-  double maxSpeed;
-  double averageCadence;
-  int averageTemp;
-  double averageWatts;
-  int weightedAverageWatts;
-  double kilojoules;
-  bool deviceWatts;
-  bool hasHeartrate;
-  int maxWatts;
-  double elevHigh;
-  double elevLow;
-  int prCount;
-  int totalPhotoCount;
-  bool hasKudoed;
-  int workoutType;
-  double sufferScore;
-  String description;
-  double calories;
-  List<SegmentEffort> segmentEfforts;
-  List<SplitsMetric> splitsMetric;
-  List<Laps> laps;
-  Gear gear;
-  String partnerBrandTag;
-  Photos photos;
-  List<HighlightedKudosers> highlightedKudosers;
-  String deviceName;
-  String embedToken;
-  bool segmentLeaderboardOptOut;
-  bool leaderboardOptOut;
+  Fault? fault;
+  int? id;
+  int? resourceState;
+  String? externalId;
+  int? uploadId;
+  Athlete? athlete;
+  String? name;
+  double? distance;
+  int? movingTime;
+  int? elapsedTime;
+  double? totalElevationGain;
+  String? type;
+  DateTime? startDate;
+  DateTime? startDateLocal;
+  String? timezone;
+  double? utcOffset;
+  List<double>? startLatlng;
+  List<double>? endLatlng;
+  double? startLatitude;
+  double? startLongitude;
+  int? achievementCount;
+  int? kudosCount;
+  int? commentCount;
+  int? athleteCount;
+  int? photoCount;
+  Carte? map;
+  bool? trainer;
+  bool? commute;
+  bool? manual;
+  bool? private;
+  bool? flagged;
+  String? gearId;
+  bool? fromAcceptedTag;
+  double? averageSpeed;
+  double? maxSpeed;
+  double? averageCadence;
+  int? averageTemp;
+  double? averageWatts;
+  int? weightedAverageWatts;
+  double? kilojoules;
+  bool? deviceWatts;
+  bool? hasHeartrate;
+  int? maxWatts;
+  double? elevHigh;
+  double? elevLow;
+  int? prCount;
+  int? totalPhotoCount;
+  bool? hasKudoed;
+  int? workoutType;
+  double? sufferScore;
+  String? description;
+  double? calories;
+  List<SegmentEffort>? segmentEfforts;
+  List<SplitsMetric>? splitsMetric;
+  List<Laps>? laps;
+  Gear? gear;
+  String? partnerBrandTag;
+  Photos? photos;
+  List<HighlightedKudosers>? highlightedKudosers;
+  String? deviceName;
+  String? embedToken;
+  bool? segmentLeaderboardOptOut;
+  bool? leaderboardOptOut;
 
   DetailedActivity(
-      {Fault fault,
+      {Fault? fault,
       this.id,
       this.resourceState,
       this.externalId,
@@ -207,29 +206,28 @@ class DetailedActivity {
     if (json['segment_efforts'] != null) {
       segmentEfforts = <SegmentEffort>[];
       json['segment_efforts'].forEach((v) {
-        segmentEfforts.add(SegmentEffort.fromJson(v));
+        segmentEfforts!.add(SegmentEffort.fromJson(v));
       });
     }
     if (json['splits_metric'] != null) {
-      splitsMetric = List<SplitsMetric>();
+      splitsMetric = <SplitsMetric>[];
       json['splits_metric'].forEach((v) {
-        splitsMetric.add(SplitsMetric.fromJson(v));
+        splitsMetric!.add(SplitsMetric.fromJson(v));
       });
     }
     if (json['laps'] != null) {
-      laps = List<Laps>();
+      laps = <Laps>[];
       json['laps'].forEach((v) {
-        laps.add(Laps.fromJson(v));
+        laps!.add(Laps.fromJson(v));
       });
     }
     gear = json['gear'] != null ? Gear.fromJson(json['gear']) : null;
     partnerBrandTag = json['partner_brand_tag'];
-    photos =
-        json['photos'] != null ? Photos.fromJson(json['photos']) : null;
+    photos = json['photos'] != null ? Photos.fromJson(json['photos']) : null;
     if (json['highlighted_kudosers'] != null) {
       highlightedKudosers = <HighlightedKudosers>[];
       json['highlighted_kudosers'].forEach((v) {
-        highlightedKudosers.add(HighlightedKudosers.fromJson(v));
+        highlightedKudosers!.add(HighlightedKudosers.fromJson(v));
       });
     }
     deviceName = json['device_name'];
@@ -245,7 +243,7 @@ class DetailedActivity {
     data['external_id'] = externalId;
     data['upload_id'] = uploadId;
     if (athlete != null) {
-      data['athlete'] = athlete.toJson();
+      data['athlete'] = athlete!.toJson();
     }
     data['name'] = name;
     data['distance'] = distance;
@@ -267,7 +265,7 @@ class DetailedActivity {
     data['athlete_count'] = athleteCount;
     data['photo_count'] = photoCount;
     if (map != null) {
-      data['map'] = map.toJson();
+      data['map'] = map!.toJson();
     }
     data['trainer'] = trainer;
     data['commute'] = commute;
@@ -296,25 +294,24 @@ class DetailedActivity {
     data['description'] = description;
     data['calories'] = calories;
     if (segmentEfforts != null) {
-      data['segment_efforts'] =
-          segmentEfforts.map((v) => v.toJson()).toList();
+      data['segment_efforts'] = segmentEfforts!.map((v) => v.toJson()).toList();
     }
     if (splitsMetric != null) {
-      data['splits_metric'] = splitsMetric.map((v) => v.toJson()).toList();
+      data['splits_metric'] = splitsMetric!.map((v) => v.toJson()).toList();
     }
     if (laps != null) {
-      data['laps'] = laps.map((v) => v.toJson()).toList();
+      data['laps'] = laps!.map((v) => v.toJson()).toList();
     }
     if (gear != null) {
-      data['gear'] = gear.toJson();
+      data['gear'] = gear!.toJson();
     }
     data['partner_brand_tag'] = partnerBrandTag;
     if (photos != null) {
-      data['photos'] = photos.toJson();
+      data['photos'] = photos!.toJson();
     }
     if (highlightedKudosers != null) {
       data['highlighted_kudosers'] =
-          highlightedKudosers.map((v) => v.toJson()).toList();
+          highlightedKudosers!.map((v) => v.toJson()).toList();
     }
     data['device_name'] = deviceName;
     data['embed_token'] = embedToken;
@@ -325,10 +322,10 @@ class DetailedActivity {
 }
 
 class Carte {
-  String id;
-  String polyline;
-  int resourceState;
-  String summaryPolyline;
+  String? id;
+  String? polyline;
+  int? resourceState;
+  String? summaryPolyline;
 
   Carte({this.id, this.polyline, this.resourceState, this.summaryPolyline});
 
@@ -468,8 +465,8 @@ class SegmentEfforts {
 *****/
 
 class Activity {
-  int id;
-  int resourceState;
+  int? id;
+  int? resourceState;
 
   Activity({this.id, this.resourceState});
 
@@ -487,28 +484,28 @@ class Activity {
 }
 
 class Segment {
-  int id;
-  int resourceState;
-  String name;
-  String activityType;
-  double distance;
-  double averageGrade;
-  double maximumGrade;
-  double elevationHigh;
-  double elevationLow;
-  List<double> startLatlng;
-  List<double> endLatlng;
-  double startLatitude;
-  double startLongitude;
-  double endLatitude;
-  double endLongitude;
-  int climbCategory;
-  String city;
-  String state;
-  String country;
-  bool private;
-  bool hazardous;
-  bool starred;
+  int? id;
+  int? resourceState;
+  String? name;
+  String? activityType;
+  double? distance;
+  double? averageGrade;
+  double? maximumGrade;
+  double? elevationHigh;
+  double? elevationLow;
+  List<double>? startLatlng;
+  List<double>? endLatlng;
+  double? startLatitude;
+  double? startLongitude;
+  double? endLatitude;
+  double? endLongitude;
+  int? climbCategory;
+  String? city;
+  String? state;
+  String? country;
+  bool? private;
+  bool? hazardous;
+  bool? starred;
 
   Segment(
       {this.id,
@@ -588,13 +585,13 @@ class Segment {
 }
 
 class SplitsMetric {
-  double distance;
-  int elapsedTime;
-  double elevationDifference;
-  int movingTime;
-  int split;
-  double averageSpeed;
-  int paceZone;
+  double? distance;
+  int? elapsedTime;
+  double? elevationDifference;
+  int? movingTime;
+  int? split;
+  double? averageSpeed;
+  int? paceZone;
 
   SplitsMetric(
       {this.distance,
@@ -629,26 +626,26 @@ class SplitsMetric {
 }
 
 class Laps {
-  int id;
-  int resourceState;
-  String name;
-  Activity activity;
-  AthleteEffort athlete;
-  int elapsedTime;
-  int movingTime;
-  String startDate;
-  String startDateLocal;
-  double distance;
-  int startIndex;
-  int endIndex;
-  double totalElevationGain;
-  double averageSpeed;
-  double maxSpeed;
-  double averageCadence;
-  bool deviceWatts;
-  double averageWatts;
-  int lapIndex;
-  int split;
+  int? id;
+  int? resourceState;
+  String? name;
+  Activity? activity;
+  AthleteEffort? athlete;
+  int? elapsedTime;
+  int? movingTime;
+  String? startDate;
+  String? startDateLocal;
+  double? distance;
+  int? startIndex;
+  int? endIndex;
+  double? totalElevationGain;
+  double? averageSpeed;
+  double? maxSpeed;
+  double? averageCadence;
+  bool? deviceWatts;
+  double? averageWatts;
+  int? lapIndex;
+  int? split;
 
   Laps(
       {this.id,
@@ -676,9 +673,8 @@ class Laps {
     id = json['id'];
     resourceState = json['resource_state'];
     name = json['name'];
-    activity = json['activity'] != null
-        ? Activity.fromJson(json['activity'])
-        : null;
+    activity =
+        json['activity'] != null ? Activity.fromJson(json['activity']) : null;
     athlete = json['athlete'] != null
         ? AthleteEffort.fromJson(json['athlete'])
         : null;
@@ -705,10 +701,10 @@ class Laps {
     data['resource_state'] = resourceState;
     data['name'] = name;
     if (activity != null) {
-      data['activity'] = activity.toJson();
+      data['activity'] = activity!.toJson();
     }
     if (athlete != null) {
-      data['athlete'] = athlete.toJson();
+      data['athlete'] = athlete!.toJson();
     }
     data['elapsed_time'] = elapsedTime;
     data['moving_time'] = movingTime;
@@ -730,9 +726,9 @@ class Laps {
 }
 
 class Photos {
-  Primary primary;
-  bool usePrimaryPhoto;
-  int count;
+  Primary? primary;
+  bool? usePrimaryPhoto;
+  int? count;
 
   Photos({this.primary, this.usePrimaryPhoto, this.count});
 
@@ -746,7 +742,7 @@ class Photos {
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     if (primary != null) {
-      data['primary'] = primary.toJson();
+      data['primary'] = primary!.toJson();
     }
     data['use_primary_photo'] = usePrimaryPhoto;
     data['count'] = count;
@@ -756,9 +752,9 @@ class Photos {
 
 class Primary {
   Null id;
-  String uniqueId;
-  Urls urls;
-  int source;
+  String? uniqueId;
+  Urls? urls;
+  int? source;
 
   Primary({this.id, this.uniqueId, this.urls, this.source});
 
@@ -774,7 +770,7 @@ class Primary {
     data['id'] = id;
     data['unique_id'] = uniqueId;
     if (urls != null) {
-      data['urls'] = urls.toJson();
+      data['urls'] = urls!.toJson();
     }
     data['source'] = source;
     return data;
@@ -782,8 +778,8 @@ class Primary {
 }
 
 class Urls {
-  String s100;
-  String s600;
+  String? s100;
+  String? s600;
 
   Urls({this.s100, this.s600});
 
@@ -801,10 +797,10 @@ class Urls {
 }
 
 class HighlightedKudosers {
-  String destinationUrl;
-  String displayName;
-  String avatarUrl;
-  bool showName;
+  String? destinationUrl;
+  String? displayName;
+  String? avatarUrl;
+  bool? showName;
 
   HighlightedKudosers(
       {this.destinationUrl, this.displayName, this.avatarUrl, this.showName});
@@ -831,55 +827,55 @@ class HighlightedKudosers {
 //------------------
 
 class SummaryActivity {
-  Fault fault;
-  int resourceState;
-  Athlete athlete;
-  String name;
-  double distance;
-  int movingTime;
-  int elapsedTime;
-  double totalElevationGain;
-  String type;
-  int workoutType;
-  int id;
-  String externalId;
-  double uploadId;
-  DateTime startDate;
-  DateTime startDateLocal;
-  String timezone;
-  double utcOffset;
-  List<double> startLatlng;
-  List<double> endLatlng;
-  String locationCity;
-  String locationState;
-  String locationCountry;
-  int achievementCount;
-  int kudosCount;
-  int commentCount;
-  int athleteCount;
-  int photoCount;
-  bool trainer;
-  bool commute;
-  bool manual;
-  bool private;
-  bool flagged;
-  String gearId;
-  bool fromAcceptedTag;
-  double averageSpeed;
-  double maxSpeed;
-  double averageCadence;
-  double averageWatts;
-  int weightedAverageWatts;
-  double kilojoules;
-  bool deviceWatts;
-  bool hasHeartrate;
-  double averageHeartrate;
-  double maxHeartrate;
-  int maxWatts;
-  int prCount;
-  int totalPhotoCount;
-  bool hasKudoed;
-  double sufferScore;
+  Fault? fault;
+  int? resourceState;
+  Athlete? athlete;
+  String? name;
+  double? distance;
+  int? movingTime;
+  int? elapsedTime;
+  double? totalElevationGain;
+  String? type;
+  int? workoutType;
+  int? id;
+  String? externalId;
+  double? uploadId;
+  DateTime? startDate;
+  DateTime? startDateLocal;
+  String? timezone;
+  double? utcOffset;
+  List<double>? startLatlng;
+  List<double>? endLatlng;
+  String? locationCity;
+  String? locationState;
+  String? locationCountry;
+  int? achievementCount;
+  int? kudosCount;
+  int? commentCount;
+  int? athleteCount;
+  int? photoCount;
+  bool? trainer;
+  bool? commute;
+  bool? manual;
+  bool? private;
+  bool? flagged;
+  String? gearId;
+  bool? fromAcceptedTag;
+  double? averageSpeed;
+  double? maxSpeed;
+  double? averageCadence;
+  double? averageWatts;
+  int? weightedAverageWatts;
+  double? kilojoules;
+  bool? deviceWatts;
+  bool? hasHeartrate;
+  double? averageHeartrate;
+  double? maxHeartrate;
+  int? maxWatts;
+  int? prCount;
+  int? totalPhotoCount;
+  bool? hasKudoed;
+  double? sufferScore;
 
   SummaryActivity({
     this.resourceState,
@@ -998,7 +994,7 @@ class SummaryActivity {
 
   Map<String, dynamic> toJson() => {
         'resource_state': resourceState,
-        'athlete': athlete.toJson(),
+        'athlete': athlete!.toJson(),
         'name': name,
         'distance': distance,
         'moving_time': movingTime,
@@ -1009,8 +1005,8 @@ class SummaryActivity {
         'id': id,
         'external_id': externalId,
         'upload_id': uploadId,
-        'start_date': startDate.toIso8601String(),
-        'start_date_local': startDateLocal.toIso8601String(),
+        'start_date': startDate!.toIso8601String(),
+        'start_date_local': startDateLocal!.toIso8601String(),
         'timezone': timezone,
         'utc_offset': utcOffset,
         'start_latlng': startLatlng,
@@ -1101,21 +1097,21 @@ class ActivityType {
 }
 
 class PhotoActivity {
-  Fault fault;
-  int id;
-  String uniqueId;
-  String urls;
-  String source;
-  String athleteId;
-  String activityId;
-  String activityName;
-  String resourceState;
-  String caption;
-  String createdAt;
-  String createdAtLocal;
-  String uploadedAt;
-  String sizes;
-  bool defaultPhoto;
+  Fault? fault;
+  int? id;
+  String? uniqueId;
+  String? urls;
+  String? source;
+  String? athleteId;
+  String? activityId;
+  String? activityName;
+  String? resourceState;
+  String? caption;
+  String? createdAt;
+  String? createdAtLocal;
+  String? uploadedAt;
+  String? sizes;
+  bool? defaultPhoto;
 
   PhotoActivity({
     this.id,

@@ -1,10 +1,10 @@
-// @dart = 2.9
+
 // zones
 import 'fault.dart';
 
 class Zone {
-  Fault fault;
-  InfoZones infoZones;
+  Fault? fault;
+  InfoZones? infoZones;
 
   Zone({this.fault, this.infoZones});
 
@@ -32,13 +32,13 @@ class Zone {
 }
 
 class InfoZones {
-  bool customZones;
-  List<DistributionBucket> zones;
+  bool? customZones;
+  List<DistributionBucket>? zones;
 }
 
 class DistributionBucket {
-  int max;
-  int min;
+  int? max;
+  int? min;
 
   DistributionBucket({this.max, this.min});
 

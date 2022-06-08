@@ -1,41 +1,41 @@
-// @dart = 2.9
+
 import 'fault.dart';
 
 class SummarySegment {
-  Fault fault;
-  int id;
-  int resourceState;
-  String name;
-  String activityType;
-  double distance;
-  double averageGrade;
-  double maximumGrade;
-  double elevationHigh;
-  double elevationLow;
-  List<double> startLatlng;
-  List<double> endLatlng;
-  double startLatitude;
-  double startLongitude;
-  double endLatitude;
-  double endLongitude;
-  int climbCategory;
-  String city;
-  String state;
-  String country;
-  bool private;
-  bool hazardous;
-  bool starred;
-  String createdAt;
-  String updatedAt;
-  double totalElevationGain;
-  Carte map;
-  int effortCount;
-  int athleteCount;
-  int starCount;
-  AthleteSegmentStats athleteSegmentStats;
+  Fault? fault;
+  int? id;
+  int? resourceState;
+  String? name;
+  String? activityType;
+  double? distance;
+  double? averageGrade;
+  double? maximumGrade;
+  double? elevationHigh;
+  double? elevationLow;
+  List<double>? startLatlng;
+  List<double>? endLatlng;
+  double? startLatitude;
+  double? startLongitude;
+  double? endLatitude;
+  double? endLongitude;
+  int? climbCategory;
+  String? city;
+  String? state;
+  String? country;
+  bool? private;
+  bool? hazardous;
+  bool? starred;
+  String? createdAt;
+  String? updatedAt;
+  double? totalElevationGain;
+  Carte? map;
+  int? effortCount;
+  int? athleteCount;
+  int? starCount;
+  AthleteSegmentStats? athleteSegmentStats;
 
   SummarySegment(
-      {Fault fault,
+      {Fault? fault,
       this.id,
       this.resourceState,
       this.name,
@@ -130,22 +130,22 @@ class SummarySegment {
     data['updated_at'] = updatedAt;
     data['total_elevation_gain'] = totalElevationGain;
     if (map != null) {
-      data['map'] = map.toJson();
+      data['map'] = map!.toJson();
     }
     data['effort_count'] = effortCount;
     data['athlete_count'] = athleteCount;
     data['star_count'] = starCount;
     if (athleteSegmentStats != null) {
-      data['athlete_segment_stats'] = athleteSegmentStats.toJson();
+      data['athlete_segment_stats'] = athleteSegmentStats!.toJson();
     }
     return data;
   }
 }
 
 class Carte {
-  String id;
-  String polyline;
-  int resourceState;
+  String? id;
+  String? polyline;
+  int? resourceState;
 
   Carte({this.id, this.polyline, this.resourceState});
 
@@ -165,9 +165,9 @@ class Carte {
 }
 
 class AthleteSegmentStats {
-  int prElapsedTime;
-  String prDate;
-  int effortCount;
+  int? prElapsedTime;
+  String? prDate;
+  int? effortCount;
 
   AthleteSegmentStats({this.prElapsedTime, this.prDate, this.effortCount});
 
@@ -187,40 +187,40 @@ class AthleteSegmentStats {
 }
 
 class DetailedSegment {
-  Fault fault;
-  int id;
-  int resourceState;
-  String name;
-  String activityType;
-  double distance;
-  double averageGrade;
-  double maximumGrade;
-  double elevationHigh;
-  double elevationLow;
-  List<double> startLatlng;
-  List<double> endLatlng;
-  double startLatitude;
-  double startLongitude;
-  double endLatitude;
-  double endLongitude;
-  int climbCategory;
-  String city;
-  String state;
-  String country;
-  bool private;
-  bool hazardous;
-  bool starred;
-  String createdAt;
-  String updatedAt;
-  double totalElevationGain;
-  Carte map;
-  int effortCount;
-  int athleteCount;
-  int starCount;
-  AthleteSegmentStats athleteSegmentStats;
+  Fault? fault;
+  int? id;
+  int? resourceState;
+  String? name;
+  String? activityType;
+  double? distance;
+  double? averageGrade;
+  double? maximumGrade;
+  double? elevationHigh;
+  double? elevationLow;
+  List<double>? startLatlng;
+  List<double>? endLatlng;
+  double? startLatitude;
+  double? startLongitude;
+  double? endLatitude;
+  double? endLongitude;
+  int? climbCategory;
+  String? city;
+  String? state;
+  String? country;
+  bool? private;
+  bool? hazardous;
+  bool? starred;
+  String? createdAt;
+  String? updatedAt;
+  double? totalElevationGain;
+  Carte? map;
+  int? effortCount;
+  int? athleteCount;
+  int? starCount;
+  AthleteSegmentStats? athleteSegmentStats;
 
   DetailedSegment(
-      {Fault fault,
+      {Fault? fault,
       this.id,
       this.resourceState,
       this.name,
@@ -315,21 +315,21 @@ class DetailedSegment {
     data['updated_at'] = updatedAt;
     data['total_elevation_gain'] = totalElevationGain;
     if (map != null) {
-      data['map'] = map.toJson();
+      data['map'] = map!.toJson();
     }
     data['effort_count'] = effortCount;
     data['athlete_count'] = athleteCount;
     data['star_count'] = starCount;
     if (athleteSegmentStats != null) {
-      data['athlete_segment_stats'] = athleteSegmentStats.toJson();
+      data['athlete_segment_stats'] = athleteSegmentStats!.toJson();
     }
     return data;
   }
 }
 
 class SegmentsList {
-  Fault fault;
-  final List<SummarySegment> segments;
+  Fault? fault;
+  final List<SummarySegment>? segments;
 
   SegmentsList({this.segments});
 
@@ -342,11 +342,11 @@ class SegmentsList {
 }
 
 class SegmentLeaderboard {
-  Fault fault;
-  int effortCount;
-  int entryCount;
-  String komType;
-  List<Entries> entries;
+  Fault? fault;
+  int? effortCount;
+  int? entryCount;
+  String? komType;
+  List<Entries>? entries;
 
   SegmentLeaderboard(
       {this.fault,
@@ -362,7 +362,7 @@ class SegmentLeaderboard {
     if (json['entries'] != null) {
       entries = <Entries>[];
       json['entries'].forEach((v) {
-        entries.add(Entries.fromJson(v));
+        entries!.add(Entries.fromJson(v));
       });
     }
   }
@@ -373,19 +373,19 @@ class SegmentLeaderboard {
     data['entry_count'] = entryCount;
     data['kom_type'] = komType;
     if (entries != null) {
-      data['entries'] = entries.map((v) => v.toJson()).toList();
+      data['entries'] = entries!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Entries {
-  String athleteName;
-  int elapsedTime;
-  int movingTime;
-  String startDate;
-  String startDateLocal;
-  int rank;
+  String? athleteName;
+  int? elapsedTime;
+  int? movingTime;
+  String? startDate;
+  String? startDateLocal;
+  int? rank;
 
   Entries(
       {this.athleteName,

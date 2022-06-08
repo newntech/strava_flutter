@@ -1,4 +1,4 @@
-// @dart = 2.9
+
 // Upload file
 
 import 'dart:async';
@@ -36,7 +36,7 @@ abstract class Upload {
     final String notFound = 'Not Found';
 
     final postUri = Uri.parse('https://www.strava.com/api/v3/uploads');
-    StreamController<int> onUploadPending = StreamController();
+    StreamController<int?> onUploadPending = StreamController();
 
     var fault = Fault(888, '');
 
@@ -67,14 +67,14 @@ abstract class Upload {
         'Response: ${response.statusCode} ${response.reasonPhrase}');
 
     fault.statusCode = response.statusCode;
-    fault.message = response.reasonPhrase;
+    fault.message = response.reasonPhrase!;
 
     if (response.statusCode != 201) {
       globals.displayInfo('Error while uploading the activity');
       globals.displayInfo('${response.statusCode} - ${response.reasonPhrase}');
     }
 
-    int idUpload;
+    int? idUpload;
 
     // Upload is processed by the server
     // now wait for the upload to be finished
@@ -109,23 +109,23 @@ abstract class Upload {
           print('---> 404 activity already loaded  ${resp.reasonPhrase}');
         }
 
-        if (resp.reasonPhrase.compareTo(ready) == 0) {
+        if (resp.reasonPhrase!.compareTo(ready) == 0) {
           print('---> Activity succesfully uploaded');
           onUploadPending.close();
         }
 
-        if ((resp.reasonPhrase.compareTo(notFound) == 0) ||
-            (resp.reasonPhrase.compareTo(errorMsg) == 0)) {
+        if ((resp.reasonPhrase!.compareTo(notFound) == 0) ||
+            (resp.reasonPhrase!.compareTo(errorMsg) == 0)) {
           print('---> Error while checking status upload');
           onUploadPending.close();
         }
 
-        if (resp.reasonPhrase.compareTo(deleted) == 0) {
+        if (resp.reasonPhrase!.compareTo(deleted) == 0) {
           print('---> Activity deleted');
           onUploadPending.close();
         }
 
-        if (resp.reasonPhrase.compareTo(processed) == 0) {
+        if (resp.reasonPhrase!.compareTo(processed) == 0) {
           print('---> try another time');
           // wait 2 sec before checking again status
           Timer(Duration(seconds: 2), () => onUploadPending.add(id));

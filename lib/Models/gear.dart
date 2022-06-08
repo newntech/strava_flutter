@@ -1,21 +1,21 @@
-// @dart = 2.9
+
 // gear.dart
 
 import 'fault.dart';
 
 class Gear {
-  Fault fault;
-  String id;
-  bool primary;
-  int resourceState;
-  int distance;
-  String brandName;
-  String modelName;
-  int frameType;
-  String description;
+  Fault? fault;
+  String? id;
+  bool? primary;
+  int? resourceState;
+  int? distance;
+  String? brandName;
+  String? modelName;
+  int? frameType;
+  String? description;
 
   Gear(
-      {Fault fault,
+      {Fault? fault,
       this.id,
       this.primary,
       this.resourceState,

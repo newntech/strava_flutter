@@ -1,7 +1,7 @@
-// @dart = 2.9
+
 class Athlete {
-  int id;
-  int resourceState;
+  int? id;
+  int? resourceState;
 
   Athlete({this.id, this.resourceState});
 

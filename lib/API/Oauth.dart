@@ -1,4 +1,3 @@
-// @dart = 2.9
 // oauth.dart
 
 import 'package:flutter/foundation.dart';
@@ -26,11 +25,11 @@ import 'package:strava_flutter/Models/fault.dart';
 /// Class related to Authorization processs
 ///===========================================
 abstract class Auth {
-  StreamController<String> onCodeReceived = StreamController();
+  StreamController<String?> onCodeReceived = StreamController();
 
   /// Save the token and the expiry date
-  Future<void> _saveToken(String token, int expiresAt, int expiresIn,
-      String scope, String refreshToken) async {
+  Future<void> _saveToken(String? token, int? expiresAt, int? expiresIn,
+      String? scope, String? refreshToken) async {
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('strava_accessToken', token ?? null.toString());
@@ -97,7 +96,7 @@ abstract class Auth {
 
     if (localToken.expiresAt != null) {
       final dateExpired =
-          DateTime.fromMillisecondsSinceEpoch(localToken.expiresAt);
+          DateTime.fromMillisecondsSinceEpoch(localToken.expiresAt!);
       final _disp =
           '${dateExpired.day.toString()}/${dateExpired.month.toString()} ${dateExpired.hour.toString()} hours';
       globals.displayInfo(
@@ -112,7 +111,7 @@ abstract class Auth {
   Future<void> _getStravaCode(
       String clientID, String scope, String prompt) async {
     globals.displayInfo('Entering getStravaCode');
-    var code = '';
+    String? code = '';
 
     String redirectUrl;
 
@@ -127,14 +126,14 @@ abstract class Auth {
 
     final reqAuth = authorizationEndpoint + params;
     globals.displayInfo(reqAuth);
-    StreamSubscription _sub;
+    late StreamSubscription _sub;
 
     // closeWebView();
-    await launch(reqAuth,
-        forceWebView: false,
-        // forceWebView: true,
-        forceSafariVC: false,
-        enableJavaScript: true);
+    await launchUrl(Uri(path: reqAuth));
+    // forceWebView: false,
+    // // forceWebView: true,
+    // forceSafariVC: false,
+    // enableJavaScript: true);
 
     //--------  NOT working yet on web
     if (kIsWeb) {
@@ -153,10 +152,10 @@ abstract class Auth {
       globals.displayInfo('Running on iOS or Android');
 
       // Attach a listener to the stream
-      _sub = getUriLinksStream().listen((Uri uri) {
+      _sub = uriLinkStream.listen((Uri? uri) {
         // Parse the link and warn the user, if it is not correct
         globals.displayInfo('Get a link!! $uri');
-        if (uri.scheme.compareTo('stravaflutter_$clientID') != 0) {
+        if (uri!.scheme.compareTo('stravaflutter_$clientID') != 0) {
           globals.displayInfo('This is not the good scheme ${uri.scheme}');
         }
         code = uri.queryParameters['code'];
@@ -164,7 +163,7 @@ abstract class Auth {
 
         globals.displayInfo('code $code, error $error');
 
-        closeWebView();
+        closeInAppWebView();
         onCodeReceived.add(code);
 
         globals.displayInfo('Got the new code: $code');
@@ -265,7 +264,7 @@ abstract class Auth {
     return isAuthOk;
   }
 
-  Future<String> getAuthCode(
+  Future<String?> getAuthCode(
       String clientID, String scope, String secret, String prompt) async {
     await _getStravaCode(clientID, scope, prompt);
 
@@ -284,6 +283,7 @@ abstract class Auth {
       return jsonEncode(answer.toMap());
     } else {
       globals.displayInfo('code is still null');
+      return null;
     }
   }
 
@@ -318,7 +318,7 @@ abstract class Auth {
   ///   accessToken
   ///   refreshToken (because Strava can change it when asking for new access token)
   Future<RefreshAnswer> _getNewAccessToken(
-      String clientID, String secret, String refreshToken) async {
+      String clientID, String secret, String? refreshToken) async {
     var returnToken = RefreshAnswer();
 
     final urlRefresh =
@@ -338,7 +338,7 @@ abstract class Auth {
       globals.displayInfo('Error while refreshing the token');
     }
 
-    returnToken.fault = globals.errorCheck(resp.statusCode, resp.reasonPhrase);
+    returnToken.fault = globals.errorCheck(resp.statusCode, resp.reasonPhrase!);
     return returnToken;
   }
 
@@ -362,7 +362,7 @@ abstract class Auth {
       globals.displayInfo('Error in getStravaToken');
       // will return _answer null
     } else {
-      final Map<String, dynamic> tokenBody = json.decode(value.body);
+      final Map<String, dynamic>? tokenBody = json.decode(value.body);
       final _body = Token.fromJson(tokenBody);
       var accessToken = _body.accessToken;
       var refreshToken = _body.refreshToken;
@@ -391,7 +391,7 @@ abstract class Auth {
       return false;
     }
 
-    if (token.expiresAt < DateTime.now().millisecondsSinceEpoch / 1000) {
+    if (token.expiresAt! < DateTime.now().millisecondsSinceEpoch / 1000) {
       return true;
     } else {
       return false;

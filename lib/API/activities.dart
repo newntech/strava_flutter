@@ -1,4 +1,3 @@
-// @dart = 2.9
 // activities.dart
 import 'package:http/http.dart' as http;
 import 'package:strava_flutter/Models/fault.dart';
@@ -31,16 +30,15 @@ abstract class Activities {
         globals.displayInfo(rep.statusCode.toString());
         globals.displayInfo('Activity info ${rep.body}');
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
-        final _activity =
-            DetailedActivity.fromJson(jsonResponse);
-        globals.displayInfo(_activity.name);
+        final _activity = DetailedActivity.fromJson(jsonResponse);
+        globals.displayInfo(_activity.name!);
 
         returnActivity = _activity;
       } else {
         globals.displayInfo('Activity not found');
       }
       returnActivity.fault =
-          globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+          globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
       returnActivity.fault =
@@ -62,8 +60,11 @@ abstract class Activities {
   /// like 2019-02-18 10:02:13'
   ///
   Future<DetailedActivity> createActivity(
-      String name, String type, String startDate, int elapsedTime,
-      {String description, int distance, int isTrainer, int isCommute}) async {
+      String name, String type, String startDate, int? elapsedTime,
+      {String? description,
+      int? distance,
+      int? isTrainer,
+      int? isCommute}) async {
     var returnActivity = DetailedActivity();
 
     var _header = globals.createHeader();
@@ -91,16 +92,15 @@ abstract class Activities {
         globals.displayInfo('Activity info ${resp.body}');
         final Map<String, dynamic> jsonResponse = json.decode(resp.body);
 
-        final _activity =
-            DetailedActivity.fromJson(jsonResponse);
-        globals.displayInfo(_activity.name);
+        final _activity = DetailedActivity.fromJson(jsonResponse);
+        globals.displayInfo(_activity.name!);
 
         returnActivity = _activity;
       } else {
         globals.displayInfo('Activity not found');
       }
       returnActivity.fault =
-          globals.errorCheck(resp.statusCode, resp.reasonPhrase);
+          globals.errorCheck(resp.statusCode, resp.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
       returnActivity.fault =
@@ -134,9 +134,8 @@ abstract class Activities {
         globals.displayInfo(rep.statusCode.toString());
         globals.displayInfo('Photos of activity${rep.body}');
         final Map<String, dynamic> jsonResponse = json.decode(rep.body);
-        final _activity =
-            DetailedActivity.fromJson(jsonResponse);
-        globals.displayInfo(_activity.name);
+        final _activity = DetailedActivity.fromJson(jsonResponse);
+        globals.displayInfo(_activity.name!);
 
         // returnPhoto = _activity;
       } else {
@@ -144,7 +143,7 @@ abstract class Activities {
         globals.displayInfo(rep.statusCode.toString());
         globals.displayInfo('Photos of activity${rep.body}');
       }
-      returnPhoto.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+      returnPhoto.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
       // returnActivity.fault =

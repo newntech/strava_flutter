@@ -36,7 +36,7 @@ abstract class Athletes {
         returnAthlete = _athlete;
       } else {
         globals.displayInfo(
-            'problem in updateLoggedInAthlete request , ${returnAthlete.fault.statusCode}  ${rep.body}');
+            'problem in updateLoggedInAthlete request , ${returnAthlete.fault?.statusCode}  ${rep.body}');
       }
 
       returnAthlete.fault =
@@ -67,13 +67,13 @@ abstract class Athletes {
 
       if (rep.statusCode == 200) {
         // globals.displayInfo('getStats ${rep.body}');
-        final Map<String, dynamic> jsonResponse = json.decode(rep.body);
+        var jsonResponse = json.decode(rep.body);
 
         if (jsonResponse != null) {
           returnStats = Stats.fromJson(jsonResponse);
 
           globals.displayInfo(
-              '${returnStats.ytdRideTotals.distance} ,  ${returnStats.recentRideTotals.elapsedTime}');
+              '${returnStats.ytdRideTotals?.distance} ,  ${returnStats.recentRideTotals?.elapsedTime}');
           returnStats.fault =
               globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
         } else {
@@ -109,7 +109,7 @@ abstract class Athletes {
 
       if (rep.statusCode == 200) {
         globals.displayInfo('Zone info ${rep.body}');
-        final Map<String, dynamic> jsonResponse = json.decode(rep.body);
+        var jsonResponse = json.decode(rep.body);
 
         if (jsonResponse != null) {
           var _zone = Zone();
@@ -152,7 +152,7 @@ abstract class Athletes {
         returnAthlete = _athlete;
       } else {
         globals.displayInfo(
-            'problem in getLoggedInAthlete request , ${returnAthlete.fault.statusCode}  ${rep.body}');
+            'problem in getLoggedInAthlete request , ${returnAthlete.fault?.statusCode}  ${rep.body}');
       }
 
       returnAthlete.fault =

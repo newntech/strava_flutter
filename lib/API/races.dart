@@ -1,4 +1,3 @@
-// @dart = 2.9
 // races.dart
 
 import 'package:http/http.dart' as http;
@@ -30,7 +29,7 @@ abstract class Races {
       var rep = await http.get(Uri.parse(reqRace), headers: _header);
       if (rep.statusCode == 200) {
         globals.displayInfo('Race info ${rep.body}');
-        final Map<String, dynamic> jsonResponse = json.decode(rep.body);
+        final Map<String, dynamic>? jsonResponse = json.decode(rep.body);
 
         if (jsonResponse != null) {
           returnRace = RunningRace.fromJson(jsonResponse);
@@ -38,7 +37,7 @@ abstract class Races {
           globals.displayInfo('problem in getRunningRaceById request');
         }
       }
-      returnRace.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+      returnRace.fault = globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
       returnRace.fault =
@@ -51,7 +50,7 @@ abstract class Races {
   /// Scope needed: none
   /// Answer has NO route_ids for the moment
   Future<List<RunningRace>> getRunningRaces(String year) async {
-    List<RunningRace> returnListRaces = List<RunningRace>();
+    List<RunningRace> returnListRaces = <RunningRace>[];
 
     globals.displayInfo('Entering getRunningRaces');
 
@@ -67,7 +66,7 @@ abstract class Races {
         var jsonResponse = json.decode(rep.body);
 
         if (jsonResponse != null) {
-          List<RunningRace> _listRaces = List<RunningRace>();
+          List<RunningRace> _listRaces = <RunningRace>[];
 
           jsonResponse.forEach((element) {
             var _race = RunningRace.fromJson(element);
@@ -82,7 +81,7 @@ abstract class Races {
         }
       }
       returnListRaces[0].fault =
-          globals.errorCheck(rep.statusCode, rep.reasonPhrase);
+          globals.errorCheck(rep.statusCode, rep.reasonPhrase!);
     } else {
       globals.displayInfo('Token not yet known');
       returnListRaces[0].fault =

@@ -1,12 +1,12 @@
-// @dart = 2.9
+
 //// upload.dart
 
 class UploadActivity {
-  int activityId;
-  String externalId;
-  int id;
-  String error;
-  String status;
+  int? activityId;
+  String? externalId;
+  int? id;
+  String? error;
+  String? status;
 
   UploadActivity(
       {this.activityId, this.externalId, this.id, this.error, this.status});
@@ -31,11 +31,11 @@ class UploadActivity {
 }
 
 class ResponseUploadActivity {
-  int id;
-  String externalId;
-  String error;
-  String status;
-  int activityId;
+  int? id;
+  String? externalId;
+  String? error;
+  String? status;
+  int? activityId;
 
   ResponseUploadActivity(
       this.id, this.externalId, this.error, this.status, this.activityId);

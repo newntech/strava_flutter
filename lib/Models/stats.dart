@@ -1,24 +1,24 @@
-// @dart = 2.9
+
 //// Stats
 
 import 'fault.dart';
 
 class Stats {
-  Fault fault;
-  StatsTotals recentRunTotals;
-  ActivityTotals allRunTotals;
-  StatsTotals recentSwimTotals;
-  double biggestRideDistance;
-  ActivityTotals ytdSwimTotals;
-  ActivityTotals allSwimTotals;
-  StatsTotals recentRideTotals;
-  double biggestClimbElevationGain;
-  ActivityTotals ytdRideTotals;
-  ActivityTotals allRideTotals;
-  ActivityTotals ytdRunTotals;
+  Fault? fault;
+  StatsTotals? recentRunTotals;
+  ActivityTotals? allRunTotals;
+  StatsTotals? recentSwimTotals;
+  double? biggestRideDistance;
+  ActivityTotals? ytdSwimTotals;
+  ActivityTotals? allSwimTotals;
+  StatsTotals? recentRideTotals;
+  double? biggestClimbElevationGain;
+  ActivityTotals? ytdRideTotals;
+  ActivityTotals? allRideTotals;
+  ActivityTotals? ytdRunTotals;
 
   Stats(
-      {Fault fault,
+      {Fault? fault,
       this.recentRunTotals,
       this.allRunTotals,
       this.recentSwimTotals,
@@ -77,7 +77,7 @@ class Stats {
     data['ytd_swim_totals'] = ytdSwimTotals;
     data['all_swim_totals'] = allSwimTotals;
     if (recentRideTotals != null) {
-      data['recent_ride_totals'] = recentRideTotals.toJson();
+      data['recent_ride_totals'] = recentRideTotals!.toJson();
     }
     data['biggest_climb_elevation_gain'] = biggestClimbElevationGain;
     data['ytd_ride_totals'] = ytdRideTotals;
@@ -88,12 +88,12 @@ class Stats {
 }
 
 class StatsTotals {
-  double distance;
-  int achievementCount;
-  int count;
-  int elapsedTime;
-  double elevationGain;
-  int movingTime;
+  double? distance;
+  int? achievementCount;
+  int? count;
+  int? elapsedTime;
+  double? elevationGain;
+  int? movingTime;
 
   StatsTotals(
       {this.distance,
@@ -125,12 +125,12 @@ class StatsTotals {
 }
 
 class ActivityTotals {
-  int distance;
-  int achievementCount;
-  int count;
-  int elapsedTime;
-  int elevationGain;
-  int movingTime;
+  int? distance;
+  int? achievementCount;
+  int? count;
+  int? elapsedTime;
+  int? elevationGain;
+  int? movingTime;
 
   ActivityTotals(
       {this.distance,
