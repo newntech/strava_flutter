@@ -129,7 +129,8 @@ abstract class Auth {
     late StreamSubscription _sub;
 
     // closeWebView();
-    await launchUrl(Uri(path: reqAuth));
+    await launchUrl(Uri.parse(reqAuth), mode: LaunchMode.externalApplication);
+
     // forceWebView: false,
     // // forceWebView: true,
     // forceSafariVC: false,

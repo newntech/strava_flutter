@@ -14,4 +14,4 @@ final String redirectUrlWeb = 'https://BirdyF.github.io';
 final String redirectUrlMobile =
     // "strava://redirect/"; // To use with iOS or Android
     // 'stravaflutter://redirect/'; // To use with iOS or Android
-    'stravaflutter://athloy.sloppy.zone/';
+    'stravaflutter://api.athloy.com/';
